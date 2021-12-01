@@ -14,7 +14,12 @@
       <div class="popup">
         <div class="popup__overlay"></div>
         <div class="popup__container">
-          <div class="popup__form"></div>
+          <form class="popup__form" method="post">
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <input type="text" class="popup__person popup_style_input" value="Жак-Ив Кусто">
+            <input type="text" class="popup__annotation popup_style_input" value="Исследователь океана">
+            <input type="submit" class="popup__submit" value="Сохранить">
+          </form>
           <div class="popup__close-button"></div>
         </div>
       </div>
@@ -80,9 +85,7 @@
             <div class="element__description">
               <h1 class="element__title">Колодец Тора</h1>
               <div
-                class="
-                  element__like element__like_disabled element__like_activated
-                "
+                class="element__like element__like_disabled element__like_activated"
               ></div>
             </div>
           </article>
