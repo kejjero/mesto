@@ -27,7 +27,6 @@ function closePopup () {
     popup.classList.remove("popup_opend");
 }
 
-
 function formSubmitHandler (evt) {
     evt.preventDefault(); 
     personProfile.textContent = personInput.value;
