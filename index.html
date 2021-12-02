@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/vendor/normalize.css" />
-    <link rel="stylesheet" href="/fonts/inter.css" />
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="./vendor/normalize.css" />
+    <link rel="stylesheet" href="./fonts/inter.css" />
+    <link rel="stylesheet" href="./style.css" />
     <title>Mesto</title>
   </head>
   <body class="root">
@@ -16,8 +16,8 @@
         <div class="popup__container">
           <form class="popup__form" method="post">
             <h2 class="popup__title">Редактировать профиль</h2>
-            <input type="text" class="popup__person popup_style_input" value="Жак-Ив Кусто">
-            <input type="text" class="popup__annotation popup_style_input" value="Исследователь океана">
+            <input type="text" class="popup__person popup_style_input" name="Имя" value="Жак-Ив Кусто">
+            <input type="text" class="popup__about-me popup_style_input" name="Аннотация" value="Исследователь океана">
             <input type="submit" class="popup__submit" value="Сохранить">
           </form>
           <div class="popup__close-button"></div>
@@ -34,17 +34,17 @@
             <div class="profile__info">
               <h1 class="profile__person">Жак-Ив Кусто</h1>
               <button class="profile__edit-button"></button>
-              <p class="profile__annotation">Исследователь океана</p>
+              <p class="profile__about-me">Исследователь океана</p>
             </div>
           </section>
-          <button class="add-button">+</button>
+          <button class="add-button" type="button">+</button>
         </div>
         <section class="elements">
           <article class="element">
             <div class="element__box-image">
               <img
                 class="element__image"
-                src="/images/element__plitvickie_ozera.jpg"
+                src="./images/element__plitvickie_ozera.jpg"
                 alt=""
               />
             </div>
@@ -61,7 +61,7 @@
             <div class="element__box-image">
               <img
                 class="element__image"
-                src="/images/element__salar-de-yunyi.jpg"
+                src="./images/element__salar-de-yunyi.jpg"
                 alt=""
               />
             </div>
@@ -78,7 +78,7 @@
             <div class="element__box-image">
               <img
                 class="element__image"
-                src="/images/element__kolodec_tora.jpg"
+                src="./images/element__kolodec_tora.jpg"
                 alt=""
               />
             </div>
@@ -93,7 +93,7 @@
             <div class="element__box-image">
               <img
                 class="element__image"
-                src="/images/element__skaftaftel.jpg"
+                src="./images/element__skaftaftel.jpg"
                 alt=""
               />
             </div>
@@ -110,7 +110,7 @@
             <div class="element__box-image">
               <img
                 class="element__image"
-                src="/images/element__gliciniya.jpg"
+                src="./images/element__gliciniya.jpg"
                 alt=""
               />
             </div>
@@ -127,7 +127,7 @@
             <div class="element__box-image">
               <img
                 class="element__image"
-                src="/images/element__pesheri-vaytomo.jpg"
+                src="./images/element__pesheri-vaytomo.jpg"
                 alt=""
               />
             </div>
@@ -147,5 +147,5 @@
       </footer>
     </div>
   </body>
-  <script src="/script.js"></script>
+  <script src="./script.js"></script>
 </html>

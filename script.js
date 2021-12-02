@@ -7,9 +7,9 @@ let popup = document.querySelector(".popup")
 let formElement = document.querySelector(".popup__form")
 
 let personInput = document.querySelector(".popup__person")
-let annotationInput = document.querySelector(".popup__annotation")
+let aboutMeInput = document.querySelector(".popup__about-me")
 
-let annotationProfile = document.querySelector(".profile__annotation")
+let aboutMeProfile = document.querySelector(".profile__about-me")
 let personProfile = document.querySelector(".profile__person")
 
 editButton.addEventListener("click", function () {
@@ -30,8 +30,11 @@ function closePopup () {
 function formSubmitHandler (evt) {
     evt.preventDefault(); 
     personProfile.textContent = personInput.value;
-    annotationProfile.textContent = annotationInput.value;
+    aboutMeProfile.textContent = aboutMeInput.value;
     closePopup();
 }
 
 formElement.addEventListener('submit', formSubmitHandler);
+
+// Поставить конст где это требуется
+// Исправить аннотацию на "О себе" about-me
