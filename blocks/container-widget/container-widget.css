@@ -1,0 +1,14 @@
+.container-widget {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	max-width: 880px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+@media screen and (max-width: 768px) {
+	.container-widget {
+		flex-direction: column;
+	}
+}
