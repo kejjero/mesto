@@ -4,9 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./vendor/normalize.css" />
-    <link rel="stylesheet" href="./fonts/inter.css" />
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" type="text/css" href="pages/index.css" />
     <title>Mesto</title>
   </head>
   <body class="root">
@@ -20,7 +18,7 @@
             <input type="text" class="popup__about-me popup_style_input" name="Аннотация" value="Исследователь океана">
             <input type="submit" class="popup__submit" value="Сохранить">
           </form>
-          <div class="popup__close-button"></div>
+          <button type="button" class="popup__close-button"></button>
         </div>
       </div>
       <header class="header">
@@ -33,7 +31,7 @@
             <div class="profile__avatar"></div>
             <div class="profile__info">
               <h1 class="profile__person">Жак-Ив Кусто</h1>
-              <button class="profile__edit-button"></button>
+              <button type="button" class="profile__edit-button"></button>
               <p class="profile__about-me">Исследователь океана</p>
             </div>
           </section>
@@ -45,15 +43,13 @@
               <img
                 class="element__image"
                 src="./images/element__plitvickie_ozera.jpg"
-                alt=""
-              />
+                alt="Озера"
+              >
             </div>
             <div class="element__description">
               <h1 class="element__title">Плитвицкие озёра</h1>
               <div
-                class="
-                  element__like element__like_disabled element__like_activated
-                "
+                class="element__like element__like_disabled"
               ></div>
             </div>
           </article>
@@ -62,15 +58,14 @@
               <img
                 class="element__image"
                 src="./images/element__salar-de-yunyi.jpg"
-                alt=""
-              />
+                alt="Пустыня"
+              >
             </div>
             <div class="element__description">
               <h1 class="element__title">Салар де Уюни</h1>
               <div
                 class="
-                  element__like element__like_disabled element__like_activated
-                "
+                  element__like element__like_disabled"
               ></div>
             </div>
           </article>
@@ -79,13 +74,13 @@
               <img
                 class="element__image"
                 src="./images/element__kolodec_tora.jpg"
-                alt=""
-              />
+                alt="Озеро с пропастью"
+              >
             </div>
             <div class="element__description">
               <h1 class="element__title">Колодец Тора</h1>
               <div
-                class="element__like element__like_disabled element__like_activated"
+                class="element__like element__like_disabled"
               ></div>
             </div>
           </article>
@@ -94,15 +89,13 @@
               <img
                 class="element__image"
                 src="./images/element__skaftaftel.jpg"
-                alt=""
-              />
+                alt="Ледяная пещера"
+              >
             </div>
             <div class="element__description">
               <h1 class="element__title">Скафтафетль</h1>
               <div
-                class="
-                  element__like element__like_disabled element__like_activated
-                "
+                class="element__like element__like_disabled"
               ></div>
             </div>
           </article>
@@ -111,15 +104,14 @@
               <img
                 class="element__image"
                 src="./images/element__gliciniya.jpg"
-                alt=""
-              />
+                alt="Дерево с фиолетовыми листьями"
+              >
             </div>
             <div class="element__description">
               <h1 class="element__title">Глициния</h1>
               <div
                 class="
-                  element__like element__like_disabled element__like_activated
-                "
+                  element__like element__like_disabled"
               ></div>
             </div>
           </article>
@@ -128,15 +120,13 @@
               <img
                 class="element__image"
                 src="./images/element__pesheri-vaytomo.jpg"
-                alt=""
-              />
+                alt="Темная пещера"
+              >
             </div>
             <div class="element__description">
               <h1 class="element__title">Пещеры Вайтомо</h1>
               <div
-                class="
-                  element__like element__like_disabled element__like_activated
-                "
+                class="element__like element__like_disabled"
               ></div>
             </div>
           </article>
@@ -146,6 +136,6 @@
         <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
       </footer>
     </div>
+    <script src="/scripts/script.js"type="text/javascript"></script>
   </body>
-  <script src="./script.js"></script>
 </html>
