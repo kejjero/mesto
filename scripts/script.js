@@ -1,18 +1,20 @@
-const POPUP = document.querySelector(".popup")
-const EDIT_BUTTON = document.querySelector(".profile__edit-button");
-const CLOSE_BUTTON = document.querySelector(".popup__close-button")
-const FORM__ELEMENT = document.querySelector(".popup__form")
+const popup = document.querySelector('.popup')
+const editButton = document.querySelector('.profile__edit-button');
+const closeButton = document.querySelector('.popup__close-button')
+const formElement = document.querySelector('.popup__container')
 
-let personInput = document.querySelector("#person")
-let aboutMeInput = document.querySelector("#about-me")
-let aboutMeProfile = document.querySelector(".profile__about-me")
-let personProfile = document.querySelector(".profile__person")
+let personInput = document.querySelector('#person')
+let aboutMeInput = document.querySelector('#about-me')
+let aboutMeProfile = document.querySelector('.profile__about-me')
+let personProfile = document.querySelector('.profile__person')
 
 function createPopup() {
-    POPUP.classList.add("popup_opend");
+    popup.classList.add('popup_opend');
+    personProfile.textContent = personInput.value;
+    aboutMeProfile.textContent = aboutMeInput.value;
 }
 function closePopup () {
-    POPUP.classList.remove("popup_opend");
+    popup.classList.remove('popup_opend');
 }
 
 function formSubmitHandler (evt) {
@@ -22,6 +24,11 @@ function formSubmitHandler (evt) {
     closePopup();
 }
 
-EDIT_BUTTON.addEventListener("click", createPopup);
-CLOSE_BUTTON.addEventListener("click", closePopup);
-FORM__ELEMENT.addEventListener('submit', formSubmitHandler);
+
+
+
+editButton.addEventListener('click', createPopup);
+closeButton.addEventListener('click', closePopup);
+
+
+formElement.addEventListener('submit', formSubmitHandler);
