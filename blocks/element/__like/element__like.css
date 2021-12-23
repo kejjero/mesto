@@ -3,4 +3,12 @@
 	height: 19px;
 	margin-right: 21px;
 	cursor: pointer;
+	background: url(../../../images/element__like_disabled.svg);
+	transition: opacity 0.1s ease-in;
+	border: 0;
+}
+
+
+.element__like:hover {
+	opacity: 0.5;
 }

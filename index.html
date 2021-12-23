@@ -9,34 +9,19 @@
   </head>
   <body class="root">
     <div class="page">
-      <div class="popup">
-        <div class="popup__overlay"></div>
-        <div class="popup__container">
-          <form class="popup__form" method="post">
-            <h2 class="popup__title">Редактировать профиль</h2>
-            <input type="text" id="person" class="popup__input" name="Имя" value="Жак-Ив Кусто">
-            <input type="text" id="about-me" class="popup__input" name="Обо мне" value="Исследователь океана">
-            <input type="submit" class="popup__submit" value="Сохранить">
-          </form>
-          <button type="button" class="popup__close-button"></button>
-        </div>
-      </div>
       <header class="header">
         <a class="header__logo" href="#"></a>
-        <div class="header__line"></div>
       </header>
       <main class="content">
-        <div class="container-widget">
           <section class="profile">
             <div class="profile__avatar"></div>
             <div class="profile__info">
               <h1 class="profile__person">Жак-Ив Кусто</h1>
-              <button type="button" class="profile__edit-button"></button>
               <p class="profile__about-me">Исследователь океана</p>
+              <button type="button" class="profile__edit-button"></button>
             </div>
+            <button class="profile__add-button" type="button">+</button>
           </section>
-          <button class="add-button" type="button">+</button>
-        </div>
         <section class="elements">
           <article class="element">
             <div class="element__box-image">
@@ -47,10 +32,10 @@
               >
             </div>
             <div class="element__description">
-              <h1 class="element__title">Плитвицкие озёра</h1>
-              <div
-                class="element__like element__like_disabled"
-              ></div>
+              <h2 class="element__title">Плитвицкие озёра</h2>
+              <button type="button"
+                class="element__like"
+              ></button>
             </div>
           </article>
           <article class="element">
@@ -62,11 +47,10 @@
               >
             </div>
             <div class="element__description">
-              <h1 class="element__title">Салар де Уюни</h1>
-              <div
-                class="
-                  element__like element__like_disabled"
-              ></div>
+              <h2 class="element__title">Салар де Уюни</h2>
+              <button type="button"
+                class="element__like"
+              ></button>
             </div>
           </article>
           <article class="element">
@@ -78,10 +62,10 @@
               >
             </div>
             <div class="element__description">
-              <h1 class="element__title">Колодец Тора</h1>
-              <div
-                class="element__like element__like_disabled"
-              ></div>
+              <h2 class="element__title">Колодец Тора</h2>
+              <button type="button"
+                class="element__like"
+              ></button>
             </div>
           </article>
           <article class="element">
@@ -93,10 +77,10 @@
               >
             </div>
             <div class="element__description">
-              <h1 class="element__title">Скафтафетль</h1>
-              <div
-                class="element__like element__like_disabled"
-              ></div>
+              <h2 class="element__title">Скафтафетль</h2>
+              <button type="button"
+              class="element__like"
+            ></button>
             </div>
           </article>
           <article class="element">
@@ -108,11 +92,10 @@
               >
             </div>
             <div class="element__description">
-              <h1 class="element__title">Глициния</h1>
-              <div
-                class="
-                  element__like element__like_disabled"
-              ></div>
+              <h2 class="element__title">Глициния</h2>
+              <button type="button"
+                class="element__like"
+              ></button>
             </div>
           </article>
           <article class="element">
@@ -124,10 +107,10 @@
               >
             </div>
             <div class="element__description">
-              <h1 class="element__title">Пещеры Вайтомо</h1>
-              <div
-                class="element__like element__like_disabled"
-              ></div>
+              <h2 class="element__title">Пещеры Вайтомо</h2>
+              <button type="button"
+                class="element__like"
+              ></button>
             </div>
           </article>
         </section>
@@ -135,6 +118,15 @@
       <footer class="footer">
         <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
       </footer>
+      <div class="popup">
+          <form class="popup__container" method="post" name="popup">
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <input type="text" id="person" class="popup__input" name="person" value="Жак-Ив Кусто">
+            <input type="text" id="about-me" class="popup__input" name="about-me" value="Исследователь океана">
+            <input type="submit" class="popup__submit" value="Сохранить">
+            <button type="button" class="popup__close-button"></button>
+          </form>
+      </div>
     </div>
     <script src="./scripts/script.js"></script>
   </body>

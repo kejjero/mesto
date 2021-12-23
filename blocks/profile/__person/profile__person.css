@@ -4,10 +4,14 @@
 	font-weight: 500;
 	font-size: 42px;
 	line-height: 48px;
-	margin-bottom: 14px;
+	grid-area: profile__person;
+	margin-bottom: 7px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 590px) {
 	.profile__person {
 		font-size: 27px;
 		line-height: 33px;

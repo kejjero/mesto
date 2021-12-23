@@ -1,33 +1,32 @@
-.add-button {
+.profile__add-button {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	box-sizing: border-box;
 	width: 150px;
 	height: 50px;
-	/* сделал такой костыль с padding ¯\_(ツ)_/¯  
-  flex, inline-block, vertical-align - не помогает */
 	padding: 0 0 10px 0;
 	text-align: center;
 	vertical-align: middle;
-	border: 1px solid #fff;
+	border: 2px solid #fff;
 	background-color: #000;
 	color: #fff;
 	cursor: pointer;
 	transition: opacity 0.1s ease-in;
 	font-size: 50px;
-	/* sans-serif - чтобы не загружать отдельно 
-  начертание шрифта для "+" */
-	font-family: sans-serif;
 	font-weight: 100;
+	grid-area: profile__add-button;
+	justify-self: flex-end;
+	border-radius: 2px;
 }
 
-.add-button:hover {
+.profile__add-button:hover {
 	opacity: 0.6;
 }
 
 @media screen and (max-width: 685px) {
-	.add-button {
+	.profile__add-button {
 		width: 100%;
+		font-size: 35px;
 	}
 }

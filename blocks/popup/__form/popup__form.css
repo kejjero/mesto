@@ -10,6 +10,8 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	z-index: 3;
+	box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
 }
 
 @media screen and (max-width: 540px) {
