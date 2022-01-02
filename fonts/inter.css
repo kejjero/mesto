@@ -27,13 +27,3 @@
     url("./Inter-Black.woff") format("woff"),
     url("./Inter-Black.ttf") format('truetype');
 }
-
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 200;
-  font-display: swap;
-  src: url("./Inter-ExtraLight.woff2") format("woff2"),
-    url("./Inter-ExtraLight.woff") format("woff"),
-    url("./Inter-ExtraLight.ttf") format('truetype');
-}
