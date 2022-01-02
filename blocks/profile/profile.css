@@ -6,8 +6,8 @@
 	"profile__avatar profile__info profile__add-button";
 	grid-template-columns: 120px 336px 1fr;
 	align-items: center;
-	margin: 36px auto 47px auto;
-	padding: 0 20px;
+	margin: 40px auto 50px auto;
+	box-sizing: border-box;
 }
 
 @media screen and (max-width: 900px) {
@@ -17,5 +17,7 @@
 		grid-template-areas: "profile__avatar" "profile__info" "profile__add-button";
 		height: 100%;
 		justify-items: center;
+		margin: 40px auto 40px auto;
+		padding: 0 20px;
 	}
 }

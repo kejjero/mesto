@@ -5,15 +5,15 @@
 	font-size: 42px;
 	line-height: 48px;
 	grid-area: profile__person;
-	margin-bottom: 7px;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
 }
 
-@media screen and (max-width: 590px) {
+@media screen and (max-width: 900px) {
 	.profile__person {
 		font-size: 27px;
 		line-height: 33px;
+		width: 100%;
 	}
 }

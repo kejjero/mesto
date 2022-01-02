@@ -10,8 +10,8 @@ let personProfile = document.querySelector('.profile__person')
 
 function createPopup() {
     popup.classList.add('popup_opend');
-    personProfile.textContent = personInput.value;
-    aboutMeProfile.textContent = aboutMeInput.value;
+    personInput.value = personProfile.textContent;
+    aboutMeInput.value= aboutMeProfile.textContent;
 }
 function closePopup () {
     popup.classList.remove('popup_opend');
@@ -24,11 +24,6 @@ function formSubmitHandler (evt) {
     closePopup();
 }
 
-
-
-
 editButton.addEventListener('click', createPopup);
 closeButton.addEventListener('click', closePopup);
-
-
 formElement.addEventListener('submit', formSubmitHandler);
