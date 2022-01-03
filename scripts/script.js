@@ -1,7 +1,7 @@
 const popup = document.querySelector('.popup')
 const editButton = document.querySelector('.profile__edit-button');
 const closeButton = document.querySelector('.popup__close-button')
-const formElement = document.querySelector('.popup__container')
+const formElement = document.querySelector('.popup__form')
 
 let personInput = document.querySelector('#person')
 let aboutMeInput = document.querySelector('#about-me')
@@ -27,3 +27,6 @@ function formSubmitHandler (evt) {
 editButton.addEventListener('click', createPopup);
 closeButton.addEventListener('click', closePopup);
 formElement.addEventListener('submit', formSubmitHandler);
+
+// Ради Бога HTML и CSS с пресвятым JavaScript'ом,
+// скажите, пожалуйста, что я сдал этот проект! :) †

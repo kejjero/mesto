@@ -1,14 +1,6 @@
 .popup__form {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
 	align-items: center;
 	width: 100%;
 }
-
-
-/* Я переделал вложенность попапа, 
-теперь данный файл не будет лишним 
-popup__container - белое окно 
-окно popup__form - сама форма 
-*/
