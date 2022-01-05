@@ -1,9 +1,12 @@
 .element__like {
+	border: none;
 	width: 22px;
 	height: 19px;
 	margin-right: 21px;
 	cursor: pointer;
-	background: url(../../../images/element__like_disabled.svg);
+	background: url(../../../images/element__like_disabled.svg) center no-repeat;
+	background-size: 100%;
+	background-position: center;
 	transition: opacity 0.1s ease-in;
 	border: 0;
 }
