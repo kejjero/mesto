@@ -1,20 +1,22 @@
-const popup = document.querySelector('.popup');
 
-const popupAddPlaceButton = document.querySelector('.popup_type_add-place')
-const popupEditProfileButton = document.querySelector('.popup_type_edit-profile')
+const popupAddPlaceButton = document.querySelector('.popup_type_add-place');
+const popupEditProfileButton = document.querySelector('.popup_type_edit-profile');
+const closeButtonEditProfile = document.querySelector('.popup__close-button_edit-profile');
+const closeButtonAddPlace = document.querySelector('.popup__close-button_add-place');
 
+const submitEditProfile = document.querySelector('.popup__submit_edit-profile');
+const submitAddPlace = document.querySelector('.popup__submit_add-place');
 
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
-const closeButton = document.querySelector('.popup__close-button')
-const submitEditButton = document.querySelector('#edit');
-const elements = document.querySelector('.elements')
-const templateElement = document.querySelector('#element-template').content
+const elements = document.querySelector('.elements');
+const templateElement = document.querySelector('#element-template').content;
 
-let personInput = document.querySelector('#person')
-let aboutMeInput = document.querySelector('#about-me')
-let aboutMeProfile = document.querySelector('.profile__about-me')
-let personProfile = document.querySelector('.profile__person')
+let personInput = document.querySelector('.popup__input_person');
+let aboutMeInput = document.querySelector('.popup__input_about-me');
+let aboutMeProfile = document.querySelector('.profile__about-me');
+let personProfile = document.querySelector('.profile__person');
+
 let initialCards = [
     {
         name: 'Архыз',
@@ -41,6 +43,19 @@ let initialCards = [
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
+
+// функции закрытия попапов
+const closePopupEditProfile = () => {
+    popupEditProfileButton.classList.remove('popup_opened')
+}
+
+const closePopupAddPlace = () => {
+    popupAddPlaceButton.classList.remove('popup_opened')
+}
+
+
+
+
 
 
 //Активация лайка
@@ -74,31 +89,35 @@ const loadingElements = () => {
 loadingElements();
 
 
-// Создание popup добавить место
+// // Создание popup добавить место
+//
+// createPopupAddButton = () => {
+//     popupAddPlaceButton.classList.add('popup_opened');
+// }
 
-createPopupAddButton = () => {
-    popupAddPlaceButton.classList.add('popup_opened');
+// Загрузка данных редактировать профиль
+loadingFormEditProfile = () => {
+    personInput.value = personProfile.textContent;
+    aboutMeInput.value = aboutMeProfile.textContent;
 }
+loadingFormEditProfile();
 
 
 // Создание popup Редактировать профиль
-const createPopupEditButton = () => {
+const createPopupEditProfile = () => {
+
     popupEditProfileButton.classList.add('popup_opened');
-    personInput.value = personProfile.textContent;
-    aboutMeInput.value= aboutMeProfile.textContent;
+
+
 }
+
+
 
 //Отправка формы Редактировать профиль
 const handlerFormEditButton = (evt) => {
     evt.preventDefault();
     personProfile.textContent = personInput.value;
     aboutMeProfile.textContent = aboutMeInput.value;
-    closePopup();
-}
-
-//Закрыть попап
-const closePopup = () => {
-    // Придумать как закрыть 2 попапа!!!!!
 }
 
 
@@ -106,8 +125,9 @@ const closePopup = () => {
 
 // Добавление карточки сделать через копию темплейта и присвоения тайтла и картинки !!!
 
+closeButtonEditProfile.addEventListener('click', closePopupEditProfile)
+closeButtonAddPlace.addEventListener('click', closePopupAddPlace)
 
 addButton.addEventListener('click', createPopupAddButton)
-editButton.addEventListener('click', createPopupEditButton);
-closeButton.addEventListener('click', closePopup);
-// submitEditButton.addEventListener('submit', handlerFormEditButton);
+editButton.addEventListener('click', createPopupEditProfile);
+submitEditProfile.addEventListener('submit', handlerFormEditButton);
