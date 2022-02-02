@@ -4,18 +4,21 @@ const popupEditProfileButton = document.querySelector('.popup_type_edit-profile'
 const closeButtonEditProfile = document.querySelector('.popup__close-button_edit-profile');
 const closeButtonAddPlace = document.querySelector('.popup__close-button_add-place');
 
-const submitEditProfile = document.querySelector('.popup__submit_edit-profile');
-const submitAddPlace = document.querySelector('.popup__submit_add-place');
+const formEditProfile = document.querySelector('.popup__form_edit-profile');
+const formAddPlace = document.querySelector('.popup__form_add-place')
 
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
 const elements = document.querySelector('.elements');
 const templateElement = document.querySelector('#element-template').content;
+const element = templateElement.querySelector('.element').cloneNode(true);
 
 let personInput = document.querySelector('.popup__input_person');
 let aboutMeInput = document.querySelector('.popup__input_about-me');
 let aboutMeProfile = document.querySelector('.profile__about-me');
 let personProfile = document.querySelector('.profile__person');
+
+
 
 let initialCards = [
     {
@@ -53,9 +56,14 @@ const closePopupAddPlace = () => {
     popupAddPlaceButton.classList.remove('popup_opened')
 }
 
-
-
-
+// Первоначальная агрузка данных редактировать профиль
+getFormEditProfile = () => {
+    personInput.value = personProfile.textContent;
+    aboutMeInput.value = aboutMeProfile.textContent;
+    aboutMeProfile.textContent = aboutMeInput.value;
+    personProfile.textContent = personInput.value;
+}
+getFormEditProfile();
 
 
 //Активация лайка
@@ -69,7 +77,7 @@ const trashActive = (evt) => {
 }
 
 
-// Темплейт форма
+// Темплейт форма с загрузкой карточек
 const loadingElements = () => {
     for (let i = 0; i < initialCards.length; i++) {
         const element = templateElement.querySelector('.element').cloneNode(true)
@@ -89,18 +97,11 @@ const loadingElements = () => {
 loadingElements();
 
 
-// // Создание popup добавить место
-//
-// createPopupAddButton = () => {
-//     popupAddPlaceButton.classList.add('popup_opened');
-// }
-
-// Загрузка данных редактировать профиль
-loadingFormEditProfile = () => {
-    personInput.value = personProfile.textContent;
-    aboutMeInput.value = aboutMeProfile.textContent;
+// Создание popup добавить место
+createPopupAddButton = () => {
+    popupAddPlaceButton.classList.add('popup_opened');
 }
-loadingFormEditProfile();
+
 
 
 // Создание popup Редактировать профиль
@@ -118,8 +119,37 @@ const handlerFormEditButton = (evt) => {
     evt.preventDefault();
     personProfile.textContent = personInput.value;
     aboutMeProfile.textContent = aboutMeInput.value;
+    closePopupEditProfile();
 }
 
+let namePlaceInput = document.querySelector('.popup__input_name-place')
+let linkPlaceInput = document.querySelector('.popup__input_link-place');
+
+
+const createNewElement = (name, link) => {
+    const element = templateElement.querySelector('.element').cloneNode(true);
+    const elementTitle = element.querySelector('.element__title');
+    const elementImage = element.querySelector('.element__image');
+    const elementLike = element.querySelector('.element__like')
+    const elementTrash = element.querySelector('.element__trash')
+
+    elementTitle.textContent = namePlaceInput.value;
+    elementImage.src = linkPlaceInput.value;
+
+    elementLike.addEventListener('click', likeActive);
+    elementTrash.addEventListener('click', trashActive);
+    elements.prepend(element);
+}
+
+
+//Отправка формы Добавить место
+const handlerFormAddPlace = (evt) => {
+    evt.preventDefault();
+    createNewElement(namePlaceInput, linkPlaceInput);
+    //Здесь вызвать функцию добавления темплейта и на вход поставить имя и ссылку
+
+    closePopupAddPlace();
+}
 
 
 
@@ -130,4 +160,6 @@ closeButtonAddPlace.addEventListener('click', closePopupAddPlace)
 
 addButton.addEventListener('click', createPopupAddButton)
 editButton.addEventListener('click', createPopupEditProfile);
-submitEditProfile.addEventListener('submit', handlerFormEditButton);
+
+formAddPlace.addEventListener('submit', handlerFormAddPlace);
+formEditProfile.addEventListener('submit', handlerFormEditButton);
