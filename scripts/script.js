@@ -3,6 +3,9 @@ const popupAddPlaceButton = document.querySelector('.popup_type_add-place');
 const popupEditProfileButton = document.querySelector('.popup_type_edit-profile');
 const closeButtonEditProfile = document.querySelector('.popup__close-button_edit-profile');
 const closeButtonAddPlace = document.querySelector('.popup__close-button_add-place');
+const popupZoomImage = document.querySelector('.popup_type_image')
+const closeButtonZoomImage = document.querySelector('.popup__close-button_zoom-image')
+
 
 const formEditProfile = document.querySelector('.popup__form_edit-profile');
 const formAddPlace = document.querySelector('.popup__form_add-place')
@@ -11,13 +14,13 @@ const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
 const elements = document.querySelector('.elements');
 const templateElement = document.querySelector('#element-template').content;
-const element = templateElement.querySelector('.element').cloneNode(true);
 
 let personInput = document.querySelector('.popup__input_person');
 let aboutMeInput = document.querySelector('.popup__input_about-me');
 let aboutMeProfile = document.querySelector('.profile__about-me');
 let personProfile = document.querySelector('.profile__person');
-
+let namePlaceInput = document.querySelector('.popup__input_name-place')
+let linkPlaceInput = document.querySelector('.popup__input_link-place');
 
 
 let initialCards = [
@@ -56,6 +59,10 @@ const closePopupAddPlace = () => {
     popupAddPlaceButton.classList.remove('popup_opened')
 }
 
+const closePopupZoomImage = () => {
+    popupZoomImage.classList.remove('popup_opened')
+}
+
 // Первоначальная агрузка данных редактировать профиль
 getFormEditProfile = () => {
     personInput.value = personProfile.textContent;
@@ -64,6 +71,20 @@ getFormEditProfile = () => {
     personProfile.textContent = personInput.value;
 }
 getFormEditProfile();
+
+
+
+
+// Создание попапа Zooming Image
+const zoomImageActive = (evt) => {
+    let imageElement = evt.target.parentElement.querySelector('.element__image');
+    let imagePopup = document.querySelector('.popup__image');
+    imagePopup.src = imageElement.src;
+    popupZoomImage.classList.add('popup_opened');
+}
+
+
+
 
 
 //Активация лайка
@@ -88,6 +109,7 @@ const loadingElements = () => {
 
         elementTitle.textContent = initialCards[i].name;
         elementImage.src = initialCards[i].link;
+        elementImage.addEventListener('click', zoomImageActive);
         elementLike.addEventListener('click', likeActive);
         elementTrash.addEventListener('click', trashActive);
 
@@ -122,10 +144,7 @@ const handlerFormEditButton = (evt) => {
     closePopupEditProfile();
 }
 
-let namePlaceInput = document.querySelector('.popup__input_name-place')
-let linkPlaceInput = document.querySelector('.popup__input_link-place');
-
-
+// Создание темплейт элемента
 const createNewElement = (name, link) => {
     const element = templateElement.querySelector('.element').cloneNode(true);
     const elementTitle = element.querySelector('.element__title');
@@ -136,6 +155,7 @@ const createNewElement = (name, link) => {
     elementTitle.textContent = namePlaceInput.value;
     elementImage.src = linkPlaceInput.value;
 
+    elementImage.addEventListener('click', zoomImageActive);
     elementLike.addEventListener('click', likeActive);
     elementTrash.addEventListener('click', trashActive);
     elements.prepend(element);
@@ -146,15 +166,13 @@ const createNewElement = (name, link) => {
 const handlerFormAddPlace = (evt) => {
     evt.preventDefault();
     createNewElement(namePlaceInput, linkPlaceInput);
-    //Здесь вызвать функцию добавления темплейта и на вход поставить имя и ссылку
-
     closePopupAddPlace();
+    namePlaceInput.value = '';
+    linkPlaceInput.value = '';
 }
 
 
-
-// Добавление карточки сделать через копию темплейта и присвоения тайтла и картинки !!!
-
+closeButtonZoomImage.addEventListener('click', closePopupZoomImage)
 closeButtonEditProfile.addEventListener('click', closePopupEditProfile)
 closeButtonAddPlace.addEventListener('click', closePopupAddPlace)
 
