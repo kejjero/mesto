@@ -59,7 +59,7 @@
     <div class="popup popup_type_image">
         <div class="popup__overlay">
             <button type="button" class="popup__close-button popup__close-button_zoom-image" aria-label="Закрыть"></button>
-<!-- html не проходит валидацию кода из-за пустого src в popup__image -->
+<!-- html не проходит тест на валидацию кода из-за пустого src -->
             <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="" class="popup__image">
             <p class="popup__subtitle"></p>
         </div>
@@ -69,7 +69,8 @@
         <article class="element">
             <div class="element__contain">
                 <button class="element__trash" type="button"></button>
-                <img class="element__image" alt="" src="">
+                <!-- html не проходит тест на валидацию кода из-за пустого src -->
+                <img class="element__image" alt="" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg">
             </div>
             <div class="element__description">
                 <h2 class="element__title"></h2>

@@ -6,11 +6,8 @@
 	cursor: pointer;
 	background: url(../../../images/element__like_disabled.svg) center no-repeat;
 	background-size: 100%;
-	background-position: center;
 	transition: opacity 0.1s ease-in;
-	border: 0;
 }
-
 
 .element__like:hover {
 	opacity: 0.5;
