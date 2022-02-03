@@ -96,6 +96,8 @@ const loadingElements = () => {
 
         elementTitle.textContent = initialCards[i].name;
         elementImage.src = initialCards[i].link;
+        elementImage.alt = initialCards[i].name;
+
         elementImage.addEventListener('click', zoomImageActive);
         elementLike.addEventListener('click', likeActive);
         elementTrash.addEventListener('click', trashActive);
@@ -125,6 +127,7 @@ const createNewElement = (namePlaceInput, linkPlaceInput) => {
 
     elementTitle.textContent = namePlaceInput.value;
     elementImage.src = linkPlaceInput.value;
+    elementImage.alt = namePlaceInput.value;
 
     elementImage.addEventListener('click', zoomImageActive);
     elementLike.addEventListener('click', likeActive);
