@@ -7,4 +7,9 @@
     background: url(../../../images/element__trash.svg) center no-repeat;
     right: 20px;
     top: 20px;
+    transition: opacity 0.1s ease-in;
+}
+
+.element__trash:hover {
+    opacity: 0.6;
 }

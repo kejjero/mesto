@@ -1,15 +1,11 @@
-
 const popupAddPlaceButton = document.querySelector('.popup_type_add-place');
 const popupEditProfileButton = document.querySelector('.popup_type_edit-profile');
 const closeButtonEditProfile = document.querySelector('.popup__close-button_edit-profile');
 const closeButtonAddPlace = document.querySelector('.popup__close-button_add-place');
-const popupZoomImage = document.querySelector('.popup_type_image')
-const closeButtonZoomImage = document.querySelector('.popup__close-button_zoom-image')
-
-
+const popupZoomImage = document.querySelector('.popup_type_image');
+const closeButtonZoomImage = document.querySelector('.popup__close-button_zoom-image');
 const formEditProfile = document.querySelector('.popup__form_edit-profile');
 const formAddPlace = document.querySelector('.popup__form_add-place')
-
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
 const elements = document.querySelector('.elements');
@@ -19,10 +15,8 @@ let personInput = document.querySelector('.popup__input_person');
 let aboutMeInput = document.querySelector('.popup__input_about-me');
 let aboutMeProfile = document.querySelector('.profile__about-me');
 let personProfile = document.querySelector('.profile__person');
-let namePlaceInput = document.querySelector('.popup__input_name-place')
+let namePlaceInput = document.querySelector('.popup__input_name-place');
 let linkPlaceInput = document.querySelector('.popup__input_link-place');
-
-
 let initialCards = [
     {
         name: 'Архыз',
@@ -54,38 +48,31 @@ let initialCards = [
 const closePopupEditProfile = () => {
     popupEditProfileButton.classList.remove('popup_opened')
 }
-
 const closePopupAddPlace = () => {
     popupAddPlaceButton.classList.remove('popup_opened')
 }
-
 const closePopupZoomImage = () => {
     popupZoomImage.classList.remove('popup_opened')
 }
 
-// Первоначальная агрузка данных редактировать профиль
+// Первоначальная агрузка данных Редактировать профиль
 getFormEditProfile = () => {
-    personInput.value = personProfile.textContent;
-    aboutMeInput.value = aboutMeProfile.textContent;
     aboutMeProfile.textContent = aboutMeInput.value;
     personProfile.textContent = personInput.value;
 }
 getFormEditProfile();
 
-
-
-
 // Создание попапа Zooming Image
 const zoomImageActive = (evt) => {
-    let imageElement = evt.target.parentElement.querySelector('.element__image');
-    let imagePopup = document.querySelector('.popup__image');
-    imagePopup.src = imageElement.src;
+    let elementImage = evt.target.parentElement.querySelector('.element__image');
+    let elementDescription = evt.target.parentElement.parentElement.querySelector('.element__description');
+    let cleanImage = document.querySelector('.popup__image');
+    let cleanSubtitle = document.querySelector('.popup__subtitle')
+
+    cleanImage.src = elementImage.src;
+    cleanSubtitle.textContent = elementDescription.textContent;
     popupZoomImage.classList.add('popup_opened');
 }
-
-
-
-
 
 //Активация лайка
 const likeActive = (evt) => {
@@ -98,7 +85,7 @@ const trashActive = (evt) => {
 }
 
 
-// Темплейт форма с загрузкой карточек
+// Темплейт форма с загрузкой карточек из массива
 const loadingElements = () => {
     for (let i = 0; i < initialCards.length; i++) {
         const element = templateElement.querySelector('.element').cloneNode(true)
@@ -118,34 +105,18 @@ const loadingElements = () => {
 }
 loadingElements();
 
-
-// Создание popup добавить место
+// Создание попапа Добавить место
 createPopupAddButton = () => {
     popupAddPlaceButton.classList.add('popup_opened');
 }
 
-
-
-// Создание popup Редактировать профиль
+// Создание попапа Редактировать профиль
 const createPopupEditProfile = () => {
-
     popupEditProfileButton.classList.add('popup_opened');
-
-
-}
-
-
-
-//Отправка формы Редактировать профиль
-const handlerFormEditButton = (evt) => {
-    evt.preventDefault();
-    personProfile.textContent = personInput.value;
-    aboutMeProfile.textContent = aboutMeInput.value;
-    closePopupEditProfile();
 }
 
 // Создание темплейт элемента
-const createNewElement = (name, link) => {
+const createNewElement = (namePlaceInput, linkPlaceInput) => {
     const element = templateElement.querySelector('.element').cloneNode(true);
     const elementTitle = element.querySelector('.element__title');
     const elementImage = element.querySelector('.element__image');
@@ -158,9 +129,17 @@ const createNewElement = (name, link) => {
     elementImage.addEventListener('click', zoomImageActive);
     elementLike.addEventListener('click', likeActive);
     elementTrash.addEventListener('click', trashActive);
+
     elements.prepend(element);
 }
 
+//Отправка формы Редактировать профиль
+const handlerFormEditButton = (evt) => {
+    evt.preventDefault();
+    personProfile.textContent = personInput.value;
+    aboutMeProfile.textContent = aboutMeInput.value;
+    closePopupEditProfile();
+}
 
 //Отправка формы Добавить место
 const handlerFormAddPlace = (evt) => {
@@ -171,13 +150,13 @@ const handlerFormAddPlace = (evt) => {
     linkPlaceInput.value = '';
 }
 
-
+//Закрытие попапов
 closeButtonZoomImage.addEventListener('click', closePopupZoomImage)
 closeButtonEditProfile.addEventListener('click', closePopupEditProfile)
 closeButtonAddPlace.addEventListener('click', closePopupAddPlace)
-
+//Создание попапов
 addButton.addEventListener('click', createPopupAddButton)
 editButton.addEventListener('click', createPopupEditProfile);
-
+//Отправка форм
 formAddPlace.addEventListener('submit', handlerFormAddPlace);
 formEditProfile.addEventListener('submit', handlerFormEditButton);
