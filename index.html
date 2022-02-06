@@ -45,7 +45,7 @@
     <div class="popup popup_type_add-place">
         <div class="popup__container">
             <button type="button" class="popup__close-button popup__close-button_add-place" aria-label="Закрыть"></button>
-            <form class="popup__form popup__form_add-place" method="post" name="form-add-place">
+            <form class="popup__form popup__form_add-place" method="post" name="form-add-place" id = "form-add">
                 <h2 class="popup__title">Новое место</h2>
                 <input type="text" class="popup__input popup__input_name-place" name="name-place" value="" placeholder="Название"
                        required>
@@ -59,7 +59,6 @@
     <div class="popup popup_type_image">
         <div class="popup__overlay">
             <button type="button" class="popup__close-button popup__close-button_zoom-image" aria-label="Закрыть"></button>
-<!-- html не проходит тест на валидацию кода из-за пустого src -->
             <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="" class="popup__image">
             <p class="popup__subtitle"></p>
         </div>
@@ -69,7 +68,6 @@
         <article class="element">
             <div class="element__contain">
                 <button class="element__trash" type="button"></button>
-                <!-- html не проходит тест на валидацию кода из-за пустого src -->
                 <img class="element__image" alt="" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg">
             </div>
             <div class="element__description">

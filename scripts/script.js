@@ -10,13 +10,13 @@ const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
 const elements = document.querySelector('.elements');
 const templateElement = document.querySelector('#element-template').content;
+const personInput = document.querySelector('.popup__input_person');
+const aboutMeInput = document.querySelector('.popup__input_about-me');
+const aboutMeProfile = document.querySelector('.profile__about-me');
+const personProfile = document.querySelector('.profile__person');
+const namePlaceInput = document.querySelector('.popup__input_name-place');
+const linkPlaceInput = document.querySelector('.popup__input_link-place');
 
-let personInput = document.querySelector('.popup__input_person');
-let aboutMeInput = document.querySelector('.popup__input_about-me');
-let aboutMeProfile = document.querySelector('.profile__about-me');
-let personProfile = document.querySelector('.profile__person');
-let namePlaceInput = document.querySelector('.popup__input_name-place');
-let linkPlaceInput = document.querySelector('.popup__input_link-place');
 let initialCards = [
     {
         name: 'Архыз',
@@ -44,18 +44,17 @@ let initialCards = [
     }
 ];
 
-// функции закрытия попапов
-const closePopupEditProfile = () => {
-    popupEditProfileButton.classList.remove('popup_opened')
-}
-const closePopupAddPlace = () => {
-    popupAddPlaceButton.classList.remove('popup_opened')
-}
-const closePopupZoomImage = () => {
-    popupZoomImage.classList.remove('popup_opened')
+// Закрытие попапа
+const closePopup = (popup) => {
+   popup.classList.remove('popup_opened')
 }
 
-// Первоначальная агрузка данных Редактировать профиль
+// Открытие попапа
+const openPopup = (popup) => {
+    popup.classList.add('popup_opened');
+}
+
+// Первоначальная загрузка данных Редактировать профиль
 getFormEditProfile = () => {
     aboutMeProfile.textContent = aboutMeInput.value;
     personProfile.textContent = personInput.value;
@@ -64,14 +63,16 @@ getFormEditProfile();
 
 // Создание попапа Zooming Image
 const zoomImageActive = (evt) => {
-    let elementImage = evt.target.parentElement.querySelector('.element__image');
-    let elementDescription = evt.target.parentElement.parentElement.querySelector('.element__description');
-    let cleanImage = document.querySelector('.popup__image');
-    let cleanSubtitle = document.querySelector('.popup__subtitle')
+    const elementImage = evt.target.parentElement.querySelector('.element__image');
+    const elementDescription = evt.target.parentElement.parentElement.querySelector('.element__description');
+    const cleanImage = document.querySelector('.popup__image');
+    const cleanSubtitle = document.querySelector('.popup__subtitle');
 
     cleanImage.src = elementImage.src;
+    cleanImage.alt = elementImage.alt
     cleanSubtitle.textContent = elementDescription.textContent;
-    popupZoomImage.classList.add('popup_opened');
+
+    openPopup(popupZoomImage);
 }
 
 //Активация лайка
@@ -84,56 +85,43 @@ const trashActive = (evt) => {
     evt.target.parentElement.parentElement.remove();
 }
 
-
-// Темплейт форма с загрузкой карточек из массива
-const loadingElements = () => {
-    for (let i = 0; i < initialCards.length; i++) {
-        const element = templateElement.querySelector('.element').cloneNode(true)
-        const elementTitle = element.querySelector('.element__title');
-        const elementImage = element.querySelector('.element__image');
-        const elementLike = element.querySelector('.element__like')
-        const elementTrash = element.querySelector('.element__trash')
-
-        elementTitle.textContent = initialCards[i].name;
-        elementImage.src = initialCards[i].link;
-        elementImage.alt = initialCards[i].name;
-
-        elementImage.addEventListener('click', zoomImageActive);
-        elementLike.addEventListener('click', likeActive);
-        elementTrash.addEventListener('click', trashActive);
-
-        elements.append(element)
-    }
-}
-loadingElements();
-
-// Создание попапа Добавить место
-createPopupAddButton = () => {
-    popupAddPlaceButton.classList.add('popup_opened');
-}
-
-// Создание попапа Редактировать профиль
-const createPopupEditProfile = () => {
-    popupEditProfileButton.classList.add('popup_opened');
-}
-
-// Создание темплейт элемента
-const createNewElement = (namePlaceInput, linkPlaceInput) => {
-    const element = templateElement.querySelector('.element').cloneNode(true);
+ // Создание карточки
+const createCard = (name, link) => {
+    const element = templateElement.querySelector('.element').cloneNode(true)
     const elementTitle = element.querySelector('.element__title');
     const elementImage = element.querySelector('.element__image');
     const elementLike = element.querySelector('.element__like')
     const elementTrash = element.querySelector('.element__trash')
 
-    elementTitle.textContent = namePlaceInput.value;
-    elementImage.src = linkPlaceInput.value;
-    elementImage.alt = namePlaceInput.value;
+    elementTitle.textContent = name;
+    elementImage.alt = name;
+    elementImage.src = link;
 
     elementImage.addEventListener('click', zoomImageActive);
     elementLike.addEventListener('click', likeActive);
     elementTrash.addEventListener('click', trashActive);
 
-    elements.prepend(element);
+    return element;
+}
+
+// Рендер стандартных карточек
+initialCards.forEach(item => {
+    elements.append(createCard(item.name, item.link));
+});
+
+//рендер контейнера
+const renderCard = (container) => {
+    const newElement = container[container.length - 1];
+    elements.prepend(createCard(newElement.name, newElement.link));
+}
+
+// добавление в контейнер
+const addCard = (container, nameElement, linkElement) => {
+    container.push({
+        name: nameElement.value,
+        link: linkElement.value
+    })
+    renderCard(container);
 }
 
 //Отправка формы Редактировать профиль
@@ -141,25 +129,26 @@ const handlerFormEditButton = (evt) => {
     evt.preventDefault();
     personProfile.textContent = personInput.value;
     aboutMeProfile.textContent = aboutMeInput.value;
-    closePopupEditProfile();
+    closePopup(popupEditProfileButton);
 }
 
 //Отправка формы Добавить место
 const handlerFormAddPlace = (evt) => {
     evt.preventDefault();
-    createNewElement(namePlaceInput, linkPlaceInput);
-    closePopupAddPlace();
-    namePlaceInput.value = '';
-    linkPlaceInput.value = '';
+    addCard(initialCards, namePlaceInput, linkPlaceInput);
+    closePopup(popupAddPlaceButton);
+    document.getElementById('form-add').reset();
 }
 
 //Закрытие попапов
-closeButtonZoomImage.addEventListener('click', closePopupZoomImage)
-closeButtonEditProfile.addEventListener('click', closePopupEditProfile)
-closeButtonAddPlace.addEventListener('click', closePopupAddPlace)
+closeButtonEditProfile.addEventListener('click', function () {closePopup(popupEditProfileButton);});
+closeButtonAddPlace.addEventListener('click', function () {closePopup(popupAddPlaceButton)});
+closeButtonZoomImage.addEventListener('click', function () {closePopup(popupZoomImage);});
 //Создание попапов
-addButton.addEventListener('click', createPopupAddButton)
-editButton.addEventListener('click', createPopupEditProfile);
+addButton.addEventListener('click', function () {openPopup(popupAddPlaceButton)});
+editButton.addEventListener('click', function () {openPopup(popupEditProfileButton)});
 //Отправка форм
 formAddPlace.addEventListener('submit', handlerFormAddPlace);
 formEditProfile.addEventListener('submit', handlerFormEditButton);
+
+
