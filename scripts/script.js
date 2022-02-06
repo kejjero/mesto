@@ -109,19 +109,10 @@ initialCards.forEach(item => {
     elements.append(createCard(item.name, item.link));
 });
 
-//рендер контейнера
-const renderCard = (container) => {
-    const newElement = container[container.length - 1];
-    elements.prepend(createCard(newElement.name, newElement.link));
-}
 
-// добавление в контейнер
-const addCard = (container, nameElement, linkElement) => {
-    container.push({
-        name: nameElement.value,
-        link: linkElement.value
-    })
-    renderCard(container);
+// Добавление карточки в контейнер
+const addCard = (container, createElement) => {
+    container.prepend(createElement)
 }
 
 //Отправка формы Редактировать профиль
@@ -135,7 +126,7 @@ const handlerFormEditButton = (evt) => {
 //Отправка формы Добавить место
 const handlerFormAddPlace = (evt) => {
     evt.preventDefault();
-    addCard(initialCards, namePlaceInput, linkPlaceInput);
+    addCard(elements, createCard(namePlaceInput.value, linkPlaceInput.value));
     closePopup(popupAddPlaceButton);
     document.getElementById('form-add').reset();
 }
@@ -151,4 +142,5 @@ editButton.addEventListener('click', function () {openPopup(popupEditProfileButt
 formAddPlace.addEventListener('submit', handlerFormAddPlace);
 formEditProfile.addEventListener('submit', handlerFormEditButton);
 
-
+//Надеюсь я правильно исправил в замечаниях по строкам 89 и 136.
+//renderCard и addCard - это пример одной и той же функции?
