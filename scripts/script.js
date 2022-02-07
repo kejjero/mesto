@@ -17,7 +17,7 @@ const personProfile = document.querySelector('.profile__person');
 const namePlaceInput = document.querySelector('.popup__input_name-place');
 const linkPlaceInput = document.querySelector('.popup__input_link-place');
 
-let initialCards = [
+const initialCards = [
     {
         name: 'Архыз',
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -55,11 +55,12 @@ const openPopup = (popup) => {
 }
 
 // Первоначальная загрузка данных Редактировать профиль
-getFormEditProfile = () => {
+// Я поместил срабатывание этой функции в html разметку,
+// так как на нижеуказанные оборобтчики событий нельзя закрепить 2 функции разом
+const getFormEditProfile = () => {
     aboutMeProfile.textContent = aboutMeInput.value;
     personProfile.textContent = personInput.value;
 }
-getFormEditProfile();
 
 // Создание попапа Zooming Image
 const zoomImageActive = (evt) => {
@@ -132,15 +133,12 @@ const handlerFormAddPlace = (evt) => {
 }
 
 //Закрытие попапов
-closeButtonEditProfile.addEventListener('click', function () {closePopup(popupEditProfileButton);});
+closeButtonEditProfile.addEventListener('click', function () {closePopup(popupEditProfileButton)});
 closeButtonAddPlace.addEventListener('click', function () {closePopup(popupAddPlaceButton)});
-closeButtonZoomImage.addEventListener('click', function () {closePopup(popupZoomImage);});
+closeButtonZoomImage.addEventListener('click', function () {closePopup(popupZoomImage)});
 //Создание попапов
 addButton.addEventListener('click', function () {openPopup(popupAddPlaceButton)});
 editButton.addEventListener('click', function () {openPopup(popupEditProfileButton)});
 //Отправка форм
 formAddPlace.addEventListener('submit', handlerFormAddPlace);
 formEditProfile.addEventListener('submit', handlerFormEditButton);
-
-//Надеюсь я правильно исправил в замечаниях по строкам 89 и 136.
-//renderCard и addCard - это пример одной и той же функции?
