@@ -43,6 +43,21 @@ const initialCards = [
     }
 ];
 
+// Закрытие попапа по клику оверлей
+const setOverlayListener = (evt) => {
+    const popupOpened = document.querySelector('.popup_opened')
+    if (evt.target === popupOpened) {
+        closePopup(popupOpened);
+    }
+}
+// Закрытие попапа через Esc
+const setEscListener = (evt) => {
+    const popupOpened = document.querySelector('.popup_opened')
+    if(evt.key === 'Escape'){
+        closePopup(popupOpened);
+    }
+}
+
 // Закрытие попапа
 const closePopup = (popup) => {
    popup.classList.remove('popup_opened');
@@ -51,6 +66,8 @@ const closePopup = (popup) => {
 // Открытие попапа
 const openPopup = (popup) => {
     popup.classList.add('popup_opened');
+    document.addEventListener('mousedown', setOverlayListener);
+    document.addEventListener('keydown', setEscListener)
 }
 
 // Первоначальная загрузка данных Редактировать профиль
