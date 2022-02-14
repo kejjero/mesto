@@ -38,7 +38,7 @@ const showErrors = (form, input, config) => {
 // Проверка инпутов на ошибки
 const checkingInputErrors = (input, error) => {
     if (input.type === 'text' && input.value.length === 1){
-        error.textContent = `Минимальное количество символов: 2. Длина текста сейчас: ${input.value.length} символ.`
+        error.textContent = 'Минимальное количество символов: 2. Длина текста сейчас: 1 символ.'
     }
     else if(input.type === 'url' && !input.validity.valid) {
         error.textContent = 'Введите адрес сайта.'

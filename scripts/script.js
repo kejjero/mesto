@@ -68,12 +68,14 @@ function disableButton(popup, config) {
 // Закрытие попапа
 const closePopup = (popup) => {
    popup.classList.remove('popup_opened');
+    popup.removeEventListener('mousedown', setOverlayListener);
+    document.removeEventListener('keydown', setEscListener)
 }
 
 // Открытие попапа
 const openPopup = (popup) => {
     popup.classList.add('popup_opened');
-    document.addEventListener('mousedown', setOverlayListener);
+    popup.addEventListener('mousedown', setOverlayListener);
     document.addEventListener('keydown', setEscListener)
 }
 
