@@ -151,7 +151,7 @@ const handlerFormAddPlace = (evt) => {
     addCard(elements, createCard(namePlaceInput.value, linkPlaceInput.value));
     closePopup(popupAddPlace);
     document.getElementById('form-add').reset();
-    disableButton(evt, formValidationConfig)
+    disableButton(formAddPlace, formValidationConfig)
 }
 
 //Закрытие попапов
