@@ -1,16 +1,6 @@
-const formValidationConfig = {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__button',
-    inactiveButtonClass: 'popup__button_disabled',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_visible'
-}
-
 const enableValidation = data => {
     const forms = [...document.querySelectorAll(data.formSelector)]
     forms.forEach(form => addFormsListener(form, data))
-
 }
 
 const addFormsListener = (form, config) => {
@@ -30,20 +20,31 @@ const handleSubmit = evt => {
 
 const handleField = (form, input, config) => {
     if (input.validity.valid) {
-        hideError(form, input,config)
+        hideErrors(form, input,config)
     } else {
-        showError(form, input,config)
+        showErrors(form, input,config)
     }
 }
 
-const showError = (form, input, config) => {
-    input.classList.add(config.inputErrorClass)
+const showErrors = (form, input, config) => {
+    input.classList.add(config.inputErrorClass);
     const errorElement = form.querySelector(`#${input.id}-errors`);
-
-    errorElement.textContent = 'Вы пропустили это поле.'
+    checkingInputErrors(input, errorElement);
 }
 
-const hideError = (form, input, config) => {
+const checkingInputErrors = (input, error) => {
+    if (input.type === 'text' && input.value.length === 1){
+        error.textContent = `Минимальное количество символов: 2. Длина текста сейчас: ${input.value.length} символ.`
+    }
+    else if(input.type === 'url' && !input.validity.valid) {
+        error.textContent = 'Введите адрес сайта.'
+    }
+    else {
+        error.textContent = 'Вы пропустили это поле.'
+    }
+}
+
+const hideErrors = (form, input, config) => {
     input.classList.remove(config.inputErrorClass);
     const errorElement = form.querySelector(`#${input.id}-errors`);
     errorElement.textContent = ''
@@ -52,17 +53,9 @@ const hideError = (form, input, config) => {
 
 const setSubmitButtonState = (form, config) => {
     const button = form.querySelector(config.submitButtonSelector)
-
     button.disabled = !form.checkValidity();
     button.classList.toggle(config.inactiveButtonClass, !form.checkValidity())
 }
-
-
-
-
-
-
-
 
 
 enableValidation(formValidationConfig);

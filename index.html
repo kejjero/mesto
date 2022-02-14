@@ -69,15 +69,23 @@
                 <input type="text"
                        class="popup__input popup__input_name-place"
                        name="name-place"
+                       id = "name-place"
                        value=""
                        placeholder="Название"
-                       required>
-                <input type="text"
+                       required
+                       minlength="2"
+                       maxlength="30"
+                >
+                <span id="name-place-errors" class="popup__error popup__error_visible"></span>
+                <input type="url"
                        class="popup__input popup__input_link-place"
                        name="link-place"
+                       id="link-place"
                        value=""
                        placeholder="Ссылка на картинку"
-                       required>
+                       required
+                >
+                <span id="link-place-errors" class="popup__error popup__error_visible"></span>
                 <input type="submit" class="popup__button" value="Сохранить">
             </form>
         </div>

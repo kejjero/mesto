@@ -58,6 +58,13 @@ const setEscListener = (evt) => {
     }
 }
 
+// Заблокировать сабмит
+function disableButton(popup, config) {
+    const button = popup.querySelector(config.submitButtonSelector);
+    button.classList.add(config.inactiveButtonClass);
+    button.setAttribute('disabled', 'true')
+}
+
 // Закрытие попапа
 const closePopup = (popup) => {
    popup.classList.remove('popup_opened');
@@ -144,6 +151,7 @@ const handlerFormAddPlace = (evt) => {
     addCard(elements, createCard(namePlaceInput.value, linkPlaceInput.value));
     closePopup(popupAddPlace);
     document.getElementById('form-add').reset();
+    disableButton(evt, formValidationConfig)
 }
 
 //Закрытие попапов
@@ -151,7 +159,10 @@ closeButtonEditProfile.addEventListener('click', function () {closePopup(popupEd
 closeButtonAddPlace.addEventListener('click', function () {closePopup(popupAddPlace)});
 closeButtonZoomImage.addEventListener('click', function () {closePopup(popupZoomImage)});
 //Создание попапов
-profileAddButton.addEventListener('click', function () {openPopup(popupAddPlace)});
+profileAddButton.addEventListener('click', function () {
+    openPopup(popupAddPlace)
+
+});
 profileEditButton.addEventListener('click', function () {
     getFormEditProfile()
     openPopup(popupEditProfile)
@@ -159,3 +170,12 @@ profileEditButton.addEventListener('click', function () {
 //Отправка форм
 formAddPlace.addEventListener('submit', handlerFormAddPlace);
 formEditProfile.addEventListener('submit', handlerFormEditButton);
+
+const formValidationConfig = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button',
+    inactiveButtonClass: 'popup__button_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible'
+}
