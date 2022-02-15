@@ -32,20 +32,7 @@ const handleField = (form, input, config) => {
 const showErrors = (form, input, config) => {
     input.classList.add(config.inputErrorClass);
     const errorElement = form.querySelector(`#${input.id}-errors`);
-    checkingInputErrors(input, errorElement);
-}
-
-// Проверка инпутов на ошибки
-const checkingInputErrors = (input, error) => {
-    if (input.type === 'text' && input.value.length === 1){
-        error.textContent = 'Минимальное количество символов: 2. Длина текста сейчас: 1 символ.'
-    }
-    else if(input.type === 'url' && !input.validity.valid) {
-        error.textContent = 'Введите адрес сайта.'
-    }
-    else {
-        error.textContent = 'Вы пропустили это поле.'
-    }
+    errorElement.textContent = input.validationMessage
 }
 
 //Убрать ошибки
