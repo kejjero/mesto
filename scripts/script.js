@@ -19,27 +19,27 @@ const linkPlaceInput = document.querySelector('.popup__input_link-place');
 const initialCards = [
     {
         name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+        link: 'https://sun9-41.userapi.com/impg/Tx5s-vl6goCjNNzf2BxhBPx9YgwI9qKI-Dn8Tg/VtC4MCJOCOg.jpg?size=539x1080&quality=96&sign=9f0328edd6b8f04666db84b1d42a79da&type=album'
     },
     {
         name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+        link: 'https://sun9-44.userapi.com/impf/IcXOq1v21k5HzitK1dQI70FXZPa2FLKHoIA2zw/J5pcCnWYKKc.jpg?size=960x720&quality=96&sign=f181294863f7c4d792ddcdec3f24b585&type=album'
     },
     {
         name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+        link: 'https://sun9-10.userapi.com/impf/c623628/v623628036/84df/RbqbThpGWWs.jpg?size=768x1024&quality=96&sign=f7b292a483fc797a0405a8b04bd3d6db&type=album'
     },
     {
         name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+        link: 'https://sun9-75.userapi.com/impf/c627822/v627822355/1ba8c/y09lg7HiRsA.jpg?size=555x300&quality=96&sign=649804acc83ee33d38032e15d79c0b73&type=album'
     },
     {
         name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+        link: 'https://sun9-49.userapi.com/impg/QCHCXbds29HGKmvGrlSHiaRGEJhupOm3sPKgpw/3YvYJcCKWKE.jpg?size=1440x1920&quality=96&sign=c72ddbf74743d9f7b8a0a81fefb4e306&type=album'
     },
     {
         name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+        link: 'https://sun9-60.userapi.com/impf/c850620/v850620254/133909/TCfWfPDpcXg.jpg?size=719x960&quality=96&sign=9f2513ebcf99657a655d7329f243c57e&type=album'
     }
 ];
 
