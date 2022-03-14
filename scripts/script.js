@@ -41,7 +41,7 @@ const initialCards = [
         name: 'Париж',
         link: 'https://images.unsplash.com/photo-1638369321326-6af6b7a5cdf6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
     }
-];
+]
 
 // Закрытие попапа по клику оверлей
 const setOverlayListener = (evt) => {
