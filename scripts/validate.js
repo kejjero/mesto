@@ -51,4 +51,3 @@ const setSubmitButtonState = (form, config) => {
 
 enableValidation(formValidationConfig);
 
-

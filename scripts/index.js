@@ -1,3 +1,5 @@
+import { Card } from './card.js';
+
 const popupAddPlace = document.querySelector('.popup_type_add-place');
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupZoomImage = document.querySelector('.popup_type_image');
@@ -85,60 +87,6 @@ const getFormEditProfile = () => {
     personProfile.textContent = personInput.value;
 }
 
-// Создание попапа Zooming Image
-const zoomImageActive = (evt) => {
-    const elementImage = evt.target.parentElement.querySelector('.element__image');
-    const elementDescription = evt.target.parentElement.parentElement.querySelector('.element__description');
-    const cleanImage = document.querySelector('.popup__image');
-    const cleanSubtitle = document.querySelector('.popup__subtitle');
-
-    cleanImage.src = elementImage.src;
-    cleanImage.alt = elementImage.alt;
-    cleanSubtitle.textContent = elementDescription.textContent;
-
-    openPopup(popupZoomImage);
-}
-
-//Активация лайка
-const likeActive = (evt) => {
-    evt.target.classList.toggle('element__like_active');
-}
-
-//Удаление карточки
-const trashActive = (evt) => {
-    evt.target.parentElement.parentElement.remove();
-}
-
- // Создание карточки
-const createCard = (name, link) => {
-    const element = templateElement.querySelector('.element').cloneNode(true);
-    const elementTitle = element.querySelector('.element__title');
-    const elementImage = element.querySelector('.element__image');
-    const elementLike = element.querySelector('.element__like');
-    const elementTrash = element.querySelector('.element__trash');
-
-    elementTitle.textContent = name;
-    elementImage.alt = name;
-    elementImage.src = link;
-
-    elementImage.addEventListener('click', zoomImageActive);
-    elementLike.addEventListener('click', likeActive);
-    elementTrash.addEventListener('click', trashActive);
-
-    return element;
-}
-
-// Рендер стандартных карточек
-initialCards.forEach(item => {
-    elements.append(createCard(item.name, item.link));
-});
-
-
-// Добавление карточки в контейнер
-const addCard = (container, createElement) => {
-    container.prepend(createElement);
-}
-
 //Отправка формы Редактировать профиль
 const handlerFormEditButton = (evt) => {
     evt.preventDefault();
@@ -169,6 +117,7 @@ profileEditButton.addEventListener('click', function () {
     getFormEditProfile()
     openPopup(popupEditProfile)
 });
+
 //Отправка форм
 formAddPlace.addEventListener('submit', handlerFormAddPlace);
 formEditProfile.addEventListener('submit', handlerFormEditButton);
@@ -181,3 +130,30 @@ const formValidationConfig = {
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__error_visible'
 }
+
+// Создание первоначальных карточек
+const createCards = (data, templateElement) => {
+    const newCard = new Card(data, templateElement)
+    elements.append(newCard.createCard());
+}
+
+// Отправка данных для создания стандартных карточек
+const getDataCards = (data) => {
+    data.forEach(item => {
+        createCards(item, templateElement)
+    })
+}
+
+getDataCards(initialCards)
+
+
+
+// Создание карточки
+// const createNewCard = (evt) => {
+//     evt.preventDefault();
+//     createCards(popupAddPlace.value, popupZoomImage.value)
+//     elements.prepend(createCards(popupAddPlace.value, popupZoomImage.value));
+//     closePopup();
+// }
+
+// Загрузка первоначальных карточек
