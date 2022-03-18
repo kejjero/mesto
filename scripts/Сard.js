@@ -1,5 +1,8 @@
+import { popupZoomImage } from '../utils/variables.js'
+import { openPopup } from './index.js'
+
 // Класс создания карточки
-class Card {
+export default class Card {
     constructor(data, cardSelector) {
         this._cardTitle = data.name;
         this._cardLink = data.link;
@@ -20,7 +23,7 @@ class Card {
 
     // Лайк карточки
     _likeActive() {
-        this.classList.toggle('element__like_active')
+        this.classList.toggle('element__like_active');
     }
 
     // Удаление карточки
