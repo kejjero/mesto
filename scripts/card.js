@@ -1,7 +1,5 @@
-import { openPopup } from './index.js'
-
 // Класс создания карточки
-export default class Card {
+class Card {
     constructor(data, cardSelector) {
         this._cardTitle = data.name;
         this._cardLink = data.link;
@@ -10,12 +8,11 @@ export default class Card {
 
      // Получение шаблона карточки
     _getTemplateCard() {
-        const cardElement = this._cardSelector.querySelector('.element').cloneNode(true);
-        return cardElement;
+        return this._cardSelector.querySelector('.element').cloneNode(true);
     }
 
     // Заполнение данными карточки 
-    _setDataСard() {
+    _setData() {
         this._cardName.textContent = this._cardTitle;
         this._cardImage.alt = this._cardTitle;
         this._cardImage.src = this._cardLink;
@@ -37,7 +34,6 @@ export default class Card {
         this._cardSubtitle = this.parentElement.parentElement.querySelector('.element__description');
         this._popupImage = document.querySelector('.popup__image');
         this._popupName = document.querySelector('.popup__subtitle');
-
 
         this._popupName.textContent = this._cardSubtitle.textContent;
         this._popupImage.src = this._cardImage.src;
@@ -61,7 +57,7 @@ export default class Card {
         this._cardTrash =  this._cardElement.querySelector('.element__trash');
     
         this._setEventListeners();
-        this._setDataСard();
+        this._setData();
 
         return this._cardElement;
     }

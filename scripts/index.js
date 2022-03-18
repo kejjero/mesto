@@ -1,5 +1,3 @@
-import { Card } from './card.js';
-
 const popupAddPlace = document.querySelector('.popup_type_add-place');
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupZoomImage = document.querySelector('.popup_type_image');
@@ -98,7 +96,11 @@ const handlerFormEditButton = (evt) => {
 //Отправка формы Добавить место
 const handlerFormAddPlace = (evt) => {
     evt.preventDefault();
-    addCard(elements, createCard(namePlaceInput.value, linkPlaceInput.value));
+    const newDataCards = {
+        name: namePlaceInput.value,
+        link: linkPlaceInput.value,
+    }
+    createCards(newDataCards, templateElement);
     closePopup(popupAddPlace);
     document.getElementById('form-add').reset();
     disableButton(formAddPlace, formValidationConfig)
@@ -109,10 +111,7 @@ closeButtonEditProfile.addEventListener('click', function () {closePopup(popupEd
 closeButtonAddPlace.addEventListener('click', function () {closePopup(popupAddPlace)});
 closeButtonZoomImage.addEventListener('click', function () {closePopup(popupZoomImage)});
 //Создание попапов
-profileAddButton.addEventListener('click', function () {
-    openPopup(popupAddPlace)
-
-});
+profileAddButton.addEventListener('click', function () {openPopup(popupAddPlace)});
 profileEditButton.addEventListener('click', function () {
     getFormEditProfile()
     openPopup(popupEditProfile)
@@ -122,38 +121,16 @@ profileEditButton.addEventListener('click', function () {
 formAddPlace.addEventListener('submit', handlerFormAddPlace);
 formEditProfile.addEventListener('submit', handlerFormEditButton);
 
-const formValidationConfig = {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__button',
-    inactiveButtonClass: 'popup__button_disabled',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_visible'
-}
-
-// Создание первоначальных карточек
+// Создание стандартных карточек
 const createCards = (data, templateElement) => {
     const newCard = new Card(data, templateElement)
-    elements.append(newCard.createCard());
+    elements.prepend(newCard.createCard());
 }
 
 // Отправка данных для создания стандартных карточек
-const getDataCards = (data) => {
+const getDataDefaultCards = (data) => {
     data.forEach(item => {
         createCards(item, templateElement)
     })
 }
-
-getDataCards(initialCards)
-
-
-
-// Создание карточки
-// const createNewCard = (evt) => {
-//     evt.preventDefault();
-//     createCards(popupAddPlace.value, popupZoomImage.value)
-//     elements.prepend(createCards(popupAddPlace.value, popupZoomImage.value));
-//     closePopup();
-// }
-
-// Загрузка первоначальных карточек
+getDataDefaultCards(initialCards)

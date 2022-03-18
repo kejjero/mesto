@@ -1,53 +1,77 @@
-const enableValidation = data => {
-    const forms = [...document.querySelectorAll(data.formSelector)]
-    forms.forEach(form => addFormsListener(form, data))
+const formValidationConfig = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button',
+    inactiveButtonClass: 'popup__button_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible'
 }
 
-// Добавление форм
-const addFormsListener = (form, config) => {
-    form.addEventListener('submit', handleSubmit)
-    form.addEventListener('input', () => setSubmitButtonState(form, config))
+class FormValidator {
+    constructor(config, form) {
+        this._form = form;
+        this._inputSelector = config.inputSelector;
+        this._submitButtonSelector = config.submitButtonSelector;
+        this._inactiveButtonClass = config.inactiveButtonClass;
+        this._inputErrorClass = config.inputErrorClass;
+    }
 
-    const inputs = [...form.querySelectorAll(config.inputSelector)]
-    inputs.forEach(input => input.addEventListener('input', () => handleField(form,input, config)))
+    //Влючение валидации формы
+    enableValidation() {
+        this._form.addEventListener("submit", (evt) => {
+            evt.preventDefault();
+        });
+        this._setFormsListeners();
+    }
 
-    setSubmitButtonState(form, config);
-}
+    // Добавление форм
+    _setFormsListeners() {
+        this._form.addEventListener('input', () => this._setSubmitButtonState)
 
-//Сбор отправки формы
-const handleSubmit = evt => {
-    evt.preventDefault()
-}
+        const inputs = [...this._form.querySelectorAll(this._inputSelector)]
+        inputs.forEach(input => input.addEventListener('input', () => this._handleField(input)))
 
-//Проверка на волидность формы
-const handleField = (form, input, config) => {
-    if (input.validity.valid) {
-        hideErrors(form, input,config)
-    } else {
-        showErrors(form, input,config)
+        this._setSubmitButtonState(); // Сразу проверяем форму на валидность
+    }
+
+    //Проверка на волидность формы
+    _handleField(input) {
+        console.log(input.validity.valid)
+        if (input.validity.valid) {
+            this._hideErrors(input);
+            this._setSubmitButtonState();
+        } else {
+            this._showErrors(input);
+            this._setSubmitButtonState();
+        }
+    }
+
+    //Показать ошибки
+    _showErrors(input) {
+        input.classList.add(this._inputErrorClass);
+        this._errorElement = this._form.querySelector(`#${input.id}-errors`);
+        this._errorElement.textContent = input.validationMessage;
+
+    }
+
+    //Убрать ошибки
+    _hideErrors(input) {
+        input.classList.remove(this._inputErrorClass);
+        this._errorElement = this._form.querySelector(`#${input.id}-errors`);
+        this._errorElement.textContent = ''
+    }
+
+    // Проверка состояния кнопки сабмит
+    _setSubmitButtonState() {
+        this._button = this._form.querySelector(this._submitButtonSelector);
+        this._button.disabled = !this._form.checkValidity();
+        this._button.classList.toggle(this._inactiveButtonClass, !this._form.checkValidity())
     }
 }
 
-//Показать ошибки
-const showErrors = (form, input, config) => {
-    input.classList.add(config.inputErrorClass);
-    const errorElement = form.querySelector(`#${input.id}-errors`);
-    errorElement.textContent = input.validationMessage
-}
+const addPlaceValidation = new FormValidator(formValidationConfig, formAddPlace);
+const editProfileValidation = new FormValidator(formValidationConfig, formEditProfile);
 
-//Убрать ошибки
-const hideErrors = (form, input, config) => {
-    input.classList.remove(config.inputErrorClass);
-    const errorElement = form.querySelector(`#${input.id}-errors`);
-    errorElement.textContent = ''
-}
-
-// Проверка состояния кнопки сабмит
-const setSubmitButtonState = (form, config) => {
-    const button = form.querySelector(config.submitButtonSelector)
-    button.disabled = !form.checkValidity();
-    button.classList.toggle(config.inactiveButtonClass, !form.checkValidity())
-}
-
-enableValidation(formValidationConfig);
+editProfileValidation.enableValidation();
+addPlaceValidation.enableValidation();
 
