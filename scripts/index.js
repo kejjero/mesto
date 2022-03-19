@@ -53,11 +53,11 @@ const handlerFormEditButton = (evt) => {
 //Отправка формы Добавить место
 const handlerFormAddPlace = (evt) => {
     evt.preventDefault();
-    const newDataCards = {
+    const newDataForCard = {
         name: namePlaceInput.value,
         link: linkPlaceInput.value,
     }
-    createCards(newDataCards, templateElement);
+    renderCards(newDataForCard, templateElement);
     closePopup(popupAddPlace);
     formAddPlace.reset();
     addPlaceValidation.setSubmitButtonState();
@@ -75,21 +75,22 @@ profileEditButton.addEventListener('click', function () {getFormEditProfile(); o
 formAddPlace.addEventListener('submit', handlerFormAddPlace);
 formEditProfile.addEventListener('submit', handlerFormEditButton);
 
+
 // Создание карточек
 const createCards = (data, templateElement) => {
     const newCard = new Card(data, templateElement);
-    return renderCards(newCard.createCard());
+    return newCard.createCard();
 }
 
 // Рендер карточек
-const renderCards = (card) => {
-    elements.prepend(card);
-}
+const renderCards = (data, templateElement) => { 
+    elements.prepend(createCards(data, templateElement)); 
+}  
 
 // Отправка данных для создания стандартных карточек
 const getDataDefaultCards = (data) => {
     data.forEach(item => {
-        createCards(item, templateElement);
+        renderCards(item, templateElement);
     });
 };
 getDataDefaultCards(initialCards);

@@ -7,14 +7,6 @@ export default class Card {
         this._cardTitle = data.name;
         this._cardLink = data.link;
         this._cardSelector = cardSelector;
-        this._cardElement = this._getTemplateCard();
-        this._cardName = this._cardElement.querySelector('.element__title');
-        this._cardImage = this._cardElement.querySelector('.element__image');
-        this._cardLike = this._cardElement.querySelector('.element__like');
-        this._cardTrash =  this._cardElement.querySelector('.element__trash');
-        this._popup = popupZoomImage;
-        this._popupImage = this._popup.querySelector('.popup__image');
-        this._popupName = this._popup.querySelector('.popup__subtitle');
     }
 
      // Получение шаблона карточки
@@ -41,9 +33,13 @@ export default class Card {
 
     // Открытие карточки 
     _handleZoomImage() {
-        this._popupName.textContent = this._cardName.textContent;
-        this._popupImage.src = this._cardImage.src;
-        this._popupImage.alt = this._cardImage.alt;
+        this._popup = popupZoomImage;
+        this._popupImage = this._popup.querySelector('.popup__image');
+        this._popupName = this._popup.querySelector('.popup__subtitle');
+        
+        this._popupName.textContent = this._cardTitle;
+        this._popupImage.src = this._cardLink;
+        this._popupImage.alt = this._cardLink;
         openPopup(this._popup);
     }
 
@@ -56,6 +52,12 @@ export default class Card {
 
     // Создание карточки
     createCard() {
+        this._cardElement = this._getTemplateCard();
+        this._cardName = this._cardElement.querySelector('.element__title');
+        this._cardImage = this._cardElement.querySelector('.element__image');
+        this._cardLike = this._cardElement.querySelector('.element__like');
+        this._cardTrash =  this._cardElement.querySelector('.element__trash');
+    
         this._setEventListeners();
         this._setData();
 
