@@ -10,23 +10,22 @@ export default class FormValidator {
 
     // Добавление формы
     _setFormsListeners() {
-        this._form.addEventListener('input', () => this._setSubmitButtonState);
+        this._form.addEventListener('input', () => this.setSubmitButtonState());
 
         const inputs = [...this._form.querySelectorAll(this._inputSelector)];
         inputs.forEach(input => input.addEventListener('input', () => this._handleField(input)));
 
-        this._setSubmitButtonState(); 
+        this._button = this._form.querySelector(this._submitButtonSelector);
+
+        this.setSubmitButtonState(); 
     }
 
     //Проверка на волидность формы
     _handleField(input) {
-        console.log(input.validity.valid);
         if (input.validity.valid) {
             this._hideErrors(input);
-            this._setSubmitButtonState();
         } else {
             this._showErrors(input);
-            this._setSubmitButtonState();
         }
     }
 
@@ -46,8 +45,7 @@ export default class FormValidator {
     }
 
     // Проверка состояния кнопки сабмит
-    _setSubmitButtonState() {
-        this._button = this._form.querySelector(this._submitButtonSelector);
+    setSubmitButtonState() {
         this._button.disabled = !this._form.checkValidity();
         this._button.classList.toggle(this._inactiveButtonClass, !this._form.checkValidity());
     }

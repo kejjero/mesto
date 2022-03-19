@@ -4,6 +4,9 @@ import { formValidationConfig } from '../utils/config.js';
 import Card from './Сard.js';
 import FormValidator from './FormValidator.js';
 
+const addPlaceValidation = new FormValidator(formValidationConfig, formAddPlace);
+const editProfileValidation = new FormValidator(formValidationConfig, formEditProfile);
+
 // Закрытие попапа по клику оверлей
 const setOverlayListener = (evt) => {
     const popupOpened = document.querySelector('.popup_opened');
@@ -17,13 +20,6 @@ const setEscListener = (evt) => {
     if(evt.key === 'Escape'){
         closePopup(popupOpened);
     }
-}
-
-// Заблокировать сабмит
-function disableButton(popup, config) {
-    const button = popup.querySelector(config.submitButtonSelector);
-    button.classList.add(config.inactiveButtonClass);
-    button.setAttribute('disabled', 'true');
 }
 
 // Закрытие попапа
@@ -63,8 +59,8 @@ const handlerFormAddPlace = (evt) => {
     }
     createCards(newDataCards, templateElement);
     closePopup(popupAddPlace);
-    document.getElementById('form-add').reset();
-    disableButton(formAddPlace, formValidationConfig);
+    formAddPlace.reset();
+    addPlaceValidation.setSubmitButtonState();
 }
 
 //Закрытие попапов
@@ -73,19 +69,21 @@ closeButtonAddPlace.addEventListener('click', function () {closePopup(popupAddPl
 closeButtonZoomImage.addEventListener('click', function () {closePopup(popupZoomImage)});
 //Создание попапов
 profileAddButton.addEventListener('click', function () {openPopup(popupAddPlace)});
-profileEditButton.addEventListener('click', function () {
-    getFormEditProfile();
-    openPopup(popupEditProfile);
-});
+profileEditButton.addEventListener('click', function () {getFormEditProfile(); openPopup(popupEditProfile)});
 
 //Отправка форм
 formAddPlace.addEventListener('submit', handlerFormAddPlace);
 formEditProfile.addEventListener('submit', handlerFormEditButton);
 
-// Создание стандартных карточек
+// Создание карточек
 const createCards = (data, templateElement) => {
     const newCard = new Card(data, templateElement);
-    elements.prepend(newCard.createCard());
+    return renderCards(newCard.createCard());
+}
+
+// Рендер карточек
+const renderCards = (card) => {
+    elements.prepend(card);
 }
 
 // Отправка данных для создания стандартных карточек
@@ -98,8 +96,6 @@ getDataDefaultCards(initialCards);
 
 // Валидация форм
 const addValidation = () => {
-    const addPlaceValidation = new FormValidator(formValidationConfig, formAddPlace);
-    const editProfileValidation = new FormValidator(formValidationConfig, formEditProfile);
     editProfileValidation.enableValidation();
     addPlaceValidation.enableValidation();
 }

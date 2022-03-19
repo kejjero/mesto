@@ -7,6 +7,14 @@ export default class Card {
         this._cardTitle = data.name;
         this._cardLink = data.link;
         this._cardSelector = cardSelector;
+        this._cardElement = this._getTemplateCard();
+        this._cardName = this._cardElement.querySelector('.element__title');
+        this._cardImage = this._cardElement.querySelector('.element__image');
+        this._cardLike = this._cardElement.querySelector('.element__like');
+        this._cardTrash =  this._cardElement.querySelector('.element__trash');
+        this._popup = popupZoomImage;
+        this._popupImage = this._popup.querySelector('.popup__image');
+        this._popupName = this._popup.querySelector('.popup__subtitle');
     }
 
      // Получение шаблона карточки
@@ -22,43 +30,32 @@ export default class Card {
     }
 
     // Лайк карточки
-    _likeActive() {
-        this.classList.toggle('element__like_active');
+    _handleLikeButton() {
+        this._cardLike.classList.toggle('element__like_active');
     }
 
     // Удаление карточки
-    _trashActive() {
-        this.parentElement.parentElement.remove();
+    _handleTrashButton() {
+        this._cardElement.remove();
     }
 
     // Открытие карточки 
-    _zoomImageActive() {
-        this._cardImage = this.parentElement.querySelector('.element__image');
-        this._cardSubtitle = this.parentElement.parentElement.querySelector('.element__description');
-        this._popupImage = document.querySelector('.popup__image');
-        this._popupName = document.querySelector('.popup__subtitle');
-
-        this._popupName.textContent = this._cardSubtitle.textContent;
+    _handleZoomImage() {
+        this._popupName.textContent = this._cardName.textContent;
         this._popupImage.src = this._cardImage.src;
         this._popupImage.alt = this._cardImage.alt;
-        openPopup(popupZoomImage);
+        openPopup(this._popup);
     }
 
     // Обработчики событий
     _setEventListeners() {
-        this._cardImage.addEventListener('click', this._zoomImageActive);
-        this._cardLike.addEventListener('click', this._likeActive);
-        this._cardTrash.addEventListener('click', this._trashActive);
+        this._cardImage.addEventListener('click', () => {this._handleZoomImage()});
+        this._cardLike.addEventListener('click', () => {this._handleLikeButton()});
+        this._cardTrash.addEventListener('click', () => {this._handleTrashButton()});
     }
 
     // Создание карточки
     createCard() {
-        this._cardElement = this._getTemplateCard();
-        this._cardName = this._cardElement.querySelector('.element__title');
-        this._cardImage = this._cardElement.querySelector('.element__image');
-        this._cardLike = this._cardElement.querySelector('.element__like');
-        this._cardTrash =  this._cardElement.querySelector('.element__trash');
-    
         this._setEventListeners();
         this._setData();
 
