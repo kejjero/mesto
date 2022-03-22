@@ -1,12 +1,12 @@
-import { popupZoomImage } from '../utils/variables.js'
-import { openPopup } from './index.js'
+
 
 // Класс создания карточки
 export default class Card {
-    constructor(data, cardSelector) {
+    constructor(data, cardSelector, openImagePopup) {
         this._cardTitle = data.name;
         this._cardLink = data.link;
         this._cardSelector = cardSelector;
+        this._openImagePopup = openImagePopup;
     }
 
      // Получение шаблона карточки
@@ -31,23 +31,11 @@ export default class Card {
         this._cardElement.remove();
     }
 
-    // Открытие карточки 
-    _handleZoomImage() {
-        this._popup = popupZoomImage;
-        this._popupImage = this._popup.querySelector('.popup__image');
-        this._popupName = this._popup.querySelector('.popup__subtitle');
-        
-        this._popupName.textContent = this._cardTitle;
-        this._popupImage.src = this._cardLink;
-        this._popupImage.alt = this._cardLink;
-        openPopup(this._popup);
-    }
-
     // Обработчики событий
     _setEventListeners() {
-        this._cardImage.addEventListener('click', () => {this._handleZoomImage()});
         this._cardLike.addEventListener('click', () => {this._handleLikeButton()});
         this._cardTrash.addEventListener('click', () => {this._handleTrashButton()});
+        this._cardImage.addEventListener('click', () => {this._openImagePopup.open()})
     }
 
     // Создание карточки
