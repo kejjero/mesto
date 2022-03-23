@@ -3,6 +3,7 @@
 // Класс создания карточки
 export default class Card {
     constructor(data, cardSelector, openImagePopup) {
+        this.data = data;
         this._cardTitle = data.name;
         this._cardLink = data.link;
         this._cardSelector = cardSelector;
@@ -35,7 +36,7 @@ export default class Card {
     _setEventListeners() {
         this._cardLike.addEventListener('click', () => {this._handleLikeButton()});
         this._cardTrash.addEventListener('click', () => {this._handleTrashButton()});
-        this._cardImage.addEventListener('click', () => {this._openImagePopup.open()})
+        this._cardImage.addEventListener('click', () => {this._openImagePopup.open(this.data)})
     }
 
     // Создание карточки
