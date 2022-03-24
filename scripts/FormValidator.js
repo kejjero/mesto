@@ -1,7 +1,7 @@
 // Класс создания карточки
 export default class FormValidator {
     constructor(config, form) {
-        this._form = form;
+        this._form = document.querySelector(form);
         this._inputSelector = config.inputSelector;
         this._submitButtonSelector = config.submitButtonSelector;
         this._inactiveButtonClass = config.inactiveButtonClass;

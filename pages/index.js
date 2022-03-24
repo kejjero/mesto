@@ -1,4 +1,4 @@
-import { templateSelector, AddPlaceSelector, ImageSelector, popupEditProfile, inputNamePlace,inputLinkPlace, popupZoomImage, SubmitEditProfile, SubmitAddPlace, closeButtonEditProfile, closeButtonAddPlace, closeButtonZoomImage, formEditProfile, formAddPlace, profileEditButton, profileAddButton, elementsList, personInput, aboutMeInput, aboutMeProfile, personProfile, namePlaceInput, linkPlaceInput} from '../utils/variables.js';
+import { templateSelector, AddPlaceSelector, listSelector, fromEditProfileSelector,  ImageSelector, formAddPlaceSelector, popupEditProfile, inputNamePlace,inputLinkPlace, popupZoomImage, SubmitEditProfile, SubmitAddPlace, closeButtonEditProfile, closeButtonAddPlace, closeButtonZoomImage, formEditProfile, formAddPlace, profileEditButton, profileAddButton, personInput, aboutMeInput, aboutMeProfile, personProfile, namePlaceInput, linkPlaceInput} from '../utils/variables.js';
 import { initialCards } from '../utils/initialCards.js';
 import { formValidationConfig } from '../utils/config.js';
 import Section from '../scripts/Section.js'
@@ -35,7 +35,7 @@ const cardList = new Section({
     items: initialCards,
     renderer: renderCard
 }, 
-elementsList
+listSelector
 );
 
 // Экземпляр класса Popup With Image
@@ -67,8 +67,8 @@ profileAddButton.addEventListener('click', () => {
 
 
 // Экземпляры класса FormValidator
-const addPlaceValidation = new FormValidator(formValidationConfig, formAddPlace);
-const editProfileValidation = new FormValidator(formValidationConfig, formEditProfile);
+const addPlaceValidation = new FormValidator(formValidationConfig, formAddPlaceSelector);
+const editProfileValidation = new FormValidator(formValidationConfig, fromEditProfileSelector);
 
 
 //* Активация валидации двух форм

@@ -7,7 +7,7 @@ export const formEditProfile = document.querySelector('.popup__form_edit-profile
 export const formAddPlace = document.querySelector('.popup__form_add-place');
 export const profileEditButton = document.querySelector('.profile__edit-button');
 export const profileAddButton = document.querySelector('.profile__add-button');
-export const elementsList = document.querySelector('.elements');
+
 export const personInput = document.querySelector('.popup__input_person');
 export const aboutMeInput = document.querySelector('.popup__input_about-me');
 export const aboutMeProfile = document.querySelector('.profile__about-me');
@@ -22,5 +22,9 @@ export const inputLinkPlace = document.querySelector('#link-place');
 
 
 export const templateSelector = '#element-template';
-export const ImageSelector = '.popup_type_image'
+export const ImageSelector = '.popup_type_image';
+export const fromEditProfileSelector = '.popup__form_edit-profile';
+export const formAddPlaceSelector = '.popup__form_add-place';
+
 export const AddPlaceSelector = '.popup_type_add-place';
+export const listSelector = '.elements';
