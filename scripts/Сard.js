@@ -11,13 +11,13 @@ export default class Card {
 
      // Получение шаблона карточки
     _getTemplateCard() {
-        const cardElement = document
+        this.cardElement = document
         .querySelector(this._cardSelector)
         .content
         .querySelector('.element')
         .cloneNode(true);
 
-        return cardElement;
+        return this.cardElement;
     }
 
     // Заполнение данными карточки 
@@ -45,7 +45,7 @@ export default class Card {
     }
 
     // Создание карточки
-    createCard() {
+    generateCard() {
         this._cardElement = this._getTemplateCard();
         this._cardName = this._cardElement.querySelector('.element__title');
         this._cardImage = this._cardElement.querySelector('.element__image');

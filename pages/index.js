@@ -7,11 +7,10 @@ import FormValidator from '../scripts/FormValidator.js';
 import PopupWithImage from '../scripts/PopupWithImage.js';
 import PopupWithForm from '../scripts/PopupWithForm.js';
 
-
 // Создание карточки 
 const createCard = (item) => {
         const card = new Card(item, templateSelector, (item) => handleDataSet(item));
-        const cardElement = card.createCard();
+        const cardElement = card.generateCard();
         return cardElement;
 }
 
@@ -38,17 +37,30 @@ const cardList = new Section({
 listSelector
 );
 
+
+
+
+
+
+
+
+
+
 // Экземпляр класса Popup With Image
 const newPopupImage = new PopupWithImage(ImageSelector);
+
+
+
 
 
 // Экземпляр класса добавить карточку 
 const newPopupFormAddPlace = new PopupWithForm(AddPlaceSelector, {
     callbackSubmitForm: (data) => {
         const itemsArray = {
-            name: data.elementName,
-            link: data.elementLink,
+            name: data.name,
+            link: data.link,
         }
+
         renderCard(itemsArray);
         newPopupFormAddPlace.close();
     } 
@@ -57,7 +69,7 @@ const newPopupFormAddPlace = new PopupWithForm(AddPlaceSelector, {
 profileAddButton.addEventListener('click', () => {
     newPopupFormAddPlace.open();
     addPlaceValidation.setSubmitButtonState();
-    // cardFormValidator.resetError();
+    cardFormValidator.resetErrors();
 })
 
 
@@ -73,5 +85,6 @@ const editProfileValidation = new FormValidator(formValidationConfig, fromEditPr
 
 //* Активация валидации двух форм
 editProfileValidation.enableValidation();
+newPopupImage.setEventListeners();
 addPlaceValidation.enableValidation();
 cardList.renderItems();
