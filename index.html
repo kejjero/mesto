@@ -56,9 +56,10 @@
                        maxlength="200"
                 >
                 <span id="about-me-errors" class="popup__error popup__error_visible"></span>
-                <input type="submit" class="popup__button" value="Сохранить" >
+                <input type="submit" class="popup__button popup__button_edit-profile" value="Сохранить" >
             </form>
         </div>
+        <div class="popup__overlay"></div>
     </div>
     <!-- Popup Add-place Button-->
     <div class="popup popup_type_add-place">
@@ -86,17 +87,19 @@
                        required
                 >
                 <span id="link-place-errors" class="popup__error popup__error_visible"></span>
-                <input type="submit" class="popup__button" value="Сохранить">
+                <input type="submit" class="popup__button popup__button_add-place" value="Сохранить">
             </form>
         </div>
+        <div class="popup__overlay"></div>
     </div>
     <!-- Popup Zoom Image-->
     <div class="popup popup_type_image">
-        <div class="popup__overlay">
+        <div class="popup__image-container">
             <button type="button" class="popup__close-button popup__close-button_zoom-image" aria-label="Закрыть"></button>
             <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="" class="popup__image">
             <p class="popup__subtitle"></p>
         </div>
+        <div class="popup__overlay"></div>
     </div>
     <!-- Шаблон карточки -->
     <template id="element-template">

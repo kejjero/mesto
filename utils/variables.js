@@ -16,3 +16,5 @@ export const aboutMeProfile = document.querySelector('.profile__about-me');
 export const personProfile = document.querySelector('.profile__person');
 export const namePlaceInput = document.querySelector('.popup__input_name-place');
 export const linkPlaceInput = document.querySelector('.popup__input_link-place');
+export const SubmitEditProfile = document.querySelector('.popup__button_edit-profile');
+export const SubmitAddPlace = document.querySelector('.popup__button_add-place');

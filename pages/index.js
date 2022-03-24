@@ -1,4 +1,4 @@
-import { popupAddPlace, popupEditProfile, popupZoomImage, closeButtonEditProfile, closeButtonAddPlace, closeButtonZoomImage, formEditProfile, formAddPlace, profileEditButton, profileAddButton, elementsList, templateElement, personInput, aboutMeInput, aboutMeProfile, personProfile, namePlaceInput, linkPlaceInput} from '../utils/variables.js';
+import { popupAddPlace, popupEditProfile, popupZoomImage, SubmitEditProfile, SubmitAddPlace, closeButtonEditProfile, closeButtonAddPlace, closeButtonZoomImage, formEditProfile, formAddPlace, profileEditButton, profileAddButton, elementsList, templateElement, personInput, aboutMeInput, aboutMeProfile, personProfile, namePlaceInput, linkPlaceInput} from '../utils/variables.js';
 import { initialCards } from '../utils/initialCards.js';
 import { formValidationConfig } from '../utils/config.js';
 import Section from '../scripts/Section.js'
@@ -6,56 +6,53 @@ import Card from '../scripts/Сard.js';
 import FormValidator from '../scripts/FormValidator.js';
 import Popup from '../scripts/Popup.js';
 import PopupWithImage from '../scripts/PopupWithImage.js';
+import PopupWithForm from '../scripts/PopupWithForm.js';
 
 
-
-//Отправка формы Редактировать профиль
-const handlerFormEditButton = (evt) => {
-    evt.preventDefault();
-    personProfile.textContent = personInput.value;
-    aboutMeProfile.textContent = aboutMeInput.value;
-    closePopup(popupEditProfile);
-}
-
-//Отправка формы Добавить место
-const handlerFormAddPlace = (evt) => {
-    evt.preventDefault();
-    const newData = {
-        name: namePlaceInput.value,
-        link: linkPlaceInput.value,
-    }
-    // defaultCardList.renderer()    Написать отправку 
-    closePopup(popupAddPlace);
-    formAddPlace.reset();
-    addPlaceValidation.setSubmitButtonState();
-}
-
-
-//Отправка форм
-formAddPlace.addEventListener('submit', handlerFormAddPlace);
-formEditProfile.addEventListener('submit', handlerFormEditButton);
-
-
-// Экземпляр класса PopupWithImage
+// Экземпляр класса Popup With Image
 const newPopupImage = new PopupWithImage(popupZoomImage);
-// Экземпляр класса PopupWithImage
+
+
+// Экземпляр класса Edit Profile 
+const newPopupFormEditProfile = new PopupWithForm(popupEditProfile, {
+    callbackSubmitForm: () => {
+    console.log('asd')
+
+    } 
+});
+
+profileEditButton.addEventListener('click', () => {
+    newPopupFormEditProfile.open();
+})
+
+
+ // Экземпляр класса Add Place
+// const newPopupFormAddPlace = new PopupWithForm(popupAddPlace)
 
 
 
 
 
-const defaultCardList = new Section({
+// Создание секции карточек
+const cardList = new Section({
     data: initialCards,
     renderer: (item) => {
-                const newCard = new Card(item, templateElement, newPopupImage);
+                const newCard = new Card(
+                    item,
+                    templateElement,
+                    newPopupImage,
+                    newPopupFormEditProfile,
+                    // newPopupFormAddPlace
+                    );
+                
                 const cardElement = newCard.createCard();
-                defaultCardList.addItem(cardElement);
+                cardList.addItem(cardElement);
     }
   },
   elementsList
 );
 
-defaultCardList.renderItems();
+cardList.renderItems();
 
 
 // Экземпляры класса FormValidator
