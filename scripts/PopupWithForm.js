@@ -3,50 +3,34 @@ import Popup from "./Popup.js";
 export default class PopupWithForm extends Popup {
     constructor(popupSelector, { callbackSubmitForm }) {
         super(popupSelector);
-        this._popup = popupSelector;
+        this._popup = document.querySelector(popupSelector);
+        console.log(this._popup)
+        this._form = this._popup.querySelector('.popup__form')
+        this._inputs = [...this._form.querySelectorAll('.popup__input')];
         this._callbackSubmitForm = callbackSubmitForm; 
     }
 
     _getInputValues() {
+        this._inputValues = {};
+        this._inputs.forEach((input) => {
+        this._inputValues[input.name] = input.value;
+        })
 
+        return this._inputValues;
     }
-
 
     close(){
         super.close();
+        this._form.reset();
     }
 
 
     setEventListeners() {
         super.setEventListeners();
-        this._popup.addEventListener('submit', () => this.close())
+        this._form.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+            this._callbackSubmitForm(this._getInputValues());
 
-
+        })
     }
 }
-
-// //Отправка формы Редактировать профиль
-// const handlerFormEditButton = (evt) => {
-//     evt.preventDefault();
-//     personProfile.textContent = personInput.value;
-//     aboutMeProfile.textContent = aboutMeInput.value;
-//     closePopup(popupEditProfile);
-// }
-
-// //Отправка формы Добавить место
-// const handlerFormAddPlace = (evt) => {
-//     evt.preventDefault();
-//     const newData = {
-//         name: namePlaceInput.value,
-//         link: linkPlaceInput.value,
-//     }
-//     // defaultCardList.renderer()    Написать отправку 
-//     closePopup(popupAddPlace);
-//     formAddPlace.reset();
-//     addPlaceValidation.setSubmitButtonState();
-// }
-
-
-// //Отправка форм
-// formAddPlace.addEventListener('submit', handlerFormAddPlace);
-// formEditProfile.addEventListener('submit', handlerFormEditButton);

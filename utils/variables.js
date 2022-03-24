@@ -1,4 +1,3 @@
-export const popupAddPlace = document.querySelector('.popup_type_add-place');
 export const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 export const popupZoomImage = document.querySelector('.popup_type_image');
 export const closeButtonEditProfile = document.querySelector('.popup__close-button_edit-profile');
@@ -9,7 +8,6 @@ export const formAddPlace = document.querySelector('.popup__form_add-place');
 export const profileEditButton = document.querySelector('.profile__edit-button');
 export const profileAddButton = document.querySelector('.profile__add-button');
 export const elementsList = document.querySelector('.elements');
-export const templateElement = document.querySelector('#element-template').content;
 export const personInput = document.querySelector('.popup__input_person');
 export const aboutMeInput = document.querySelector('.popup__input_about-me');
 export const aboutMeProfile = document.querySelector('.profile__about-me');
@@ -18,3 +16,11 @@ export const namePlaceInput = document.querySelector('.popup__input_name-place')
 export const linkPlaceInput = document.querySelector('.popup__input_link-place');
 export const SubmitEditProfile = document.querySelector('.popup__button_edit-profile');
 export const SubmitAddPlace = document.querySelector('.popup__button_add-place');
+
+export const inputNamePlace = document.querySelector('#name-place');
+export const inputLinkPlace = document.querySelector('#link-place'); 
+
+
+export const templateSelector = '#element-template';
+export const ImageSelector = '.popup_type_image'
+export const AddPlaceSelector = '.popup_type_add-place';

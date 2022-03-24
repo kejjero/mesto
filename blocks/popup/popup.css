@@ -14,11 +14,3 @@
 	opacity: 0;
 	transition: opacity .55s,visibility .55s linear;
 }
-
-
-.popup__overlay {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	z-index: -1;
-}
