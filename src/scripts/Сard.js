@@ -34,6 +34,7 @@ export default class Card {
     // Удаление карточки
     _handleTrashButton() {
         this._cardElement.remove();
+        this._cardElement = null;
     }
 
     // Открытие карточки

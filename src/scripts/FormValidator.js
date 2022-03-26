@@ -47,7 +47,7 @@ export default class FormValidator {
         this._button.classList.toggle(this._inactiveButtonClass, !this._form.checkValidity());
     }
 
-    //Влючение валидации формы
+    //Включение валидации формы
     enableValidation() {
         this._form.addEventListener("submit", (evt) => {
             evt.preventDefault();
