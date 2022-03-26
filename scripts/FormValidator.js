@@ -6,17 +6,14 @@ export default class FormValidator {
         this._submitButtonSelector = config.submitButtonSelector;
         this._inactiveButtonClass = config.inactiveButtonClass;
         this._inputErrorClass = config.inputErrorClass;
+        this._inputs = [...this._form.querySelectorAll(this._inputSelector)];
+        this._button = this._form.querySelector(this._submitButtonSelector);
     }
 
     // Добавление формы
     _setFormsListeners() {
         this._form.addEventListener('input', () => this.setSubmitButtonState());
-
-        const inputs = [...this._form.querySelectorAll(this._inputSelector)];
-        inputs.forEach(input => input.addEventListener('input', () => this._handleField(input)));
-
-        this._button = this._form.querySelector(this._submitButtonSelector);
-
+        this._inputs.forEach(input => input.addEventListener('input', () => this._handleField(input)));
         this.setSubmitButtonState(); 
     }
 

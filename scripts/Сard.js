@@ -1,12 +1,11 @@
 // Класс создания карточки
 export default class Card {
-    constructor(data, cardSelector, dataSet, openImagePopup) {
+    constructor(data, cardSelector, popupImage) {
         this._data = data;
         this._cardTitle = data.name;
         this._cardLink = data.link;
         this._cardSelector = cardSelector;
-        this._dataSet = dataSet;
-        this._openImagePopup = openImagePopup;
+        this._popupImage = popupImage;
     }
 
      // Получение шаблона карточки
@@ -37,11 +36,16 @@ export default class Card {
         this._cardElement.remove();
     }
 
+    // Открытие карточки
+    _handleCardClick () {
+        this._popupImage.open(this._data);
+    }
+
     // Обработчики событий
     _setEventListeners() {
-        this._cardLike.addEventListener('click', () => {this._handleLikeButton()});
-        this._cardTrash.addEventListener('click', () => {this._handleTrashButton()});
-        this._cardImage.addEventListener('click', () => {this._dataSet(this._data)});
+        this._cardLike.addEventListener('click', () => this._handleLikeButton());
+        this._cardTrash.addEventListener('click', () => this._handleTrashButton());
+        this._cardImage.addEventListener('click', () => this._handleCardClick());
     }
 
     // Создание карточки
@@ -51,7 +55,7 @@ export default class Card {
         this._cardImage = this._cardElement.querySelector('.element__image');
         this._cardLike = this._cardElement.querySelector('.element__like');
         this._cardTrash =  this._cardElement.querySelector('.element__trash');
-    
+        
         this._setEventListeners();
         this._setData();
 

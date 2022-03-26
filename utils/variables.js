@@ -26,5 +26,7 @@ export const ImageSelector = '.popup_type_image';
 export const fromEditProfileSelector = '.popup__form_edit-profile';
 export const formAddPlaceSelector = '.popup__form_add-place';
 
+
+export const EditProfileSelector = '.popup_type_edit-profie';
 export const AddPlaceSelector = '.popup_type_add-place';
 export const listSelector = '.elements';
