@@ -8,12 +8,12 @@ module.exports = {
         app: "./src/pages/index.js",
     },
     output: {
-        filename: "bundle.js",
-        path: path.resolve(__dirname, 'build'),
+        filename: "dist.js",
+        path: path.resolve(__dirname, 'dist'),
     },
     mode: 'development',
     devServer: {
-        static: path.resolve(__dirname, 'build'),
+        static: path.resolve(__dirname, 'dist'),
         open: true
     },
     module: {
