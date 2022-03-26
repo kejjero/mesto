@@ -1,4 +1,18 @@
-import { templateSelector, AddPlaceSelector, EditProfileSelector, listSelector, fromEditProfileSelector,  ImageSelector, formAddPlaceSelector, popupEditProfile, inputNamePlace,inputLinkPlace, popupZoomImage, SubmitEditProfile, SubmitAddPlace, closeButtonEditProfile, closeButtonAddPlace, closeButtonZoomImage, formEditProfile, formAddPlace, profileEditButton, profileAddButton, personInput, aboutMeInput, aboutMeProfile, personProfile, namePlaceInput, linkPlaceInput} from '../utils/variables.js';
+import { 
+    templateSelector, 
+    AddPlaceSelector, 
+    InputAboutMe,
+    InputPerson,
+    EditProfileSelector,
+    profilePerson,
+    profileAboutMe,
+    listSelector,
+    fromEditProfileSelector,
+    ImageSelector,
+    formAddPlaceSelector,
+    profileEditButton,
+    profileAddButton
+} from '../utils/variables.js';
 import { initialCards } from '../utils/initialCards.js';
 import { formValidationConfig } from '../utils/config.js';
 import Card from '../scripts/Сard.js';
@@ -6,6 +20,7 @@ import Section from '../scripts/Section.js'
 import FormValidator from '../scripts/FormValidator.js';
 import PopupWithImage from '../scripts/PopupWithImage.js';
 import PopupWithForm from '../scripts/PopupWithForm.js';
+import UserInfo from '../scripts/UserInfo.js';
 
 // Создание карточки 
 const createCard = (item) => {
@@ -39,33 +54,50 @@ const newPopupFormAddPlace = new PopupWithForm(AddPlaceSelector, {
     } 
 });
 
-// Экземпляр класса редактировать профиль 
-// const newPopupEditProfile = new PopupWithForm(EditProfileSelector, {
+// Экземпляр класса редактировать профиль
+const newPopupEditProfile = new PopupWithForm(EditProfileSelector, {
+    callbackSubmitForm: (data) => {
+        userInfo.setUserInfo(data);
+        newPopupEditProfile.close();
+    }
+});
 
-// });
+// Экземпляр класса UserInfo 
+const userInfo = new UserInfo({
+    data: {
+        person: profilePerson,
+        aboutMe: profileAboutMe
+    }
+});
 
-// Обработчики событий кнопки редактировать профиль и добавить карточку 
+// Экземпляр класса открытия карточки
+const newPopupImage = new PopupWithImage(ImageSelector);
+
+// Экземпляры класса валидации форм
+const addPlaceValidation = new FormValidator(formValidationConfig, formAddPlaceSelector);
+const editProfileValidation = new FormValidator(formValidationConfig, fromEditProfileSelector);
+
+// Слушатель события кнопка "Редактировать профиль"
+profileEditButton.addEventListener('click', () => {
+    const data = userInfo.getUserInfo();
+    InputPerson.value = data.person;
+    InputAboutMe.value = data.aboutMe;
+    newPopupEditProfile.open();
+    addPlaceValidation.setSubmitButtonState();
+});
+
+// Слушатель события кнопка "Добавить карточку"
 profileAddButton.addEventListener('click', () => {
     newPopupFormAddPlace.open();
     addPlaceValidation.setSubmitButtonState();
 })
 
-// profileEditButton.addEventListener('click', () => {
-//     newPopupEditProfile.open();
-//     newPopupEditProfile.setSubmitButtonState();
-// })
-
-
-
-// Экземпляры классов 
-const newPopupImage = new PopupWithImage(ImageSelector);
-const addPlaceValidation = new FormValidator(formValidationConfig, formAddPlaceSelector);
-const editProfileValidation = new FormValidator(formValidationConfig, fromEditProfileSelector);
-
-
-//* Активация валидации двух форм
+// Активация валидации форм
 editProfileValidation.enableValidation();
 addPlaceValidation.enableValidation();
+// Рендер стандартных карточек
 cardList.renderItems();
+// Активация слушателей попапов
 newPopupImage.setEventListeners();
 newPopupFormAddPlace.setEventListeners();
+newPopupEditProfile.setEventListeners();
