@@ -1,4 +1,5 @@
-import { 
+import '../pages/index.css'
+import {
     templateSelector, 
     AddPlaceSelector, 
     InputAboutMe,

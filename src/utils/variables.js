@@ -1,4 +1,3 @@
-
 export const profileEditButton = document.querySelector('.profile__edit-button');
 export const profileAddButton = document.querySelector('.profile__add-button');
 export const templateSelector = '#element-template';
