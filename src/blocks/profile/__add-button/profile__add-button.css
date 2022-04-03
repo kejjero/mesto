@@ -6,7 +6,7 @@
 	height: 50px;
 	border: 2px solid #fff;
 	cursor: pointer;
-	transition: opacity 0.1s ease-in;
+	transition: opacity 0.2s ease-in-out;
 	grid-area: profile__add-button;
 	justify-self: flex-end;
 	border-radius: 2px;

@@ -5,7 +5,7 @@
 	width: 24px;
 	height: 24px;
 	cursor: pointer;
-	transition: opacity 0.1s ease-in;
+	transition: opacity 0.2s ease-in-out;
 	grid-area: profile__edit-button;
 	justify-self: start;
 }

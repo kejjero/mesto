@@ -31,7 +31,6 @@ export default class FormValidator {
         input.classList.add(this._inputErrorClass);
         this._errorElement = this._form.querySelector(`#${input.id}-errors`);
         this._errorElement.textContent = input.validationMessage;
-
     }
 
     //Убрать ошибки
