@@ -27,28 +27,8 @@ import FormValidator from '../components/FormValidator.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithConfirm from '../components/PopupWithConfirm.js';
-import API from '../components/Api.js'
+import { api } from '../components/Api.js';
 let userId;
-
-// Экземпляр класса Api 
-export const api = new API({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-38',
-    headers: {
-      authorization: 
-      '6550da10-2d55-4388-86e4-3d7ab266355b',
-      'Content-Type': 'application/json'
-    }
-});
-
-// Экземпляр класса UserInfo
-const userInfo = new UserInfo({
-        data: {
-            person: profilePerson,
-            aboutMe: profileAboutMe,
-            avatar: profileAvatar,
-        }
-    }
-);
 
 // Получение данных профиля и карточек
 Promise.all([api.getProfile(), api.getCards()])
@@ -62,13 +42,6 @@ Promise.all([api.getProfile(), api.getCards()])
         console.log(err)
     })
 
-// Экземпляр класса открытия карточки
-const newPopupImage = new PopupWithImage(imageSelector);
-
-// Экземпляр класса попапа удалить карточку
-const newPopupCardDelete = new PopupWithConfirm(deleteCardSelector)
-
-
 // Создание карточки
 const createCard = (item) => {
     const card = new Card(
@@ -78,7 +51,6 @@ const createCard = (item) => {
         newPopupImage,
         userId,
         newPopupCardDelete
-
     );
     return card.generateCard();
 }
@@ -90,13 +62,12 @@ cardList.addItem(cardElement);
 }
 
 // Экземпляр класса Section
-const cardList = new Section({
-    renderer: renderCard
-}, listSelector);
+const cardList = new Section(renderCard, listSelector);
 
 // Экземпляр класса добавить карточку
 const newPopupFormAddPlace = new PopupWithForm(addPlaceSelector, {
         callbackSubmitForm: (data) => {
+            renderLoading(true);
             const card = {
             name: data.name,
             link: data.link,
@@ -110,12 +81,16 @@ const newPopupFormAddPlace = new PopupWithForm(addPlaceSelector, {
             .catch((err) => {
                 console.log(err)
             })
+            .finally(() => {
+            renderLoading(false);
+        })
    }
 })
 
 // Экземпляр класса редактировать профиль
 const newPopupEditProfile = new PopupWithForm(editProfileSelector, {
     callbackSubmitForm: (data) => {
+        renderLoading(true)
         // промис для отправки данных профиля
         api.editProfile(data.person, data.aboutMe)
             .then((newData) => {
@@ -125,12 +100,16 @@ const newPopupEditProfile = new PopupWithForm(editProfileSelector, {
             .catch((err) => {
                 console.log(err)
             })
+            .finally(() => {
+                renderLoading(false)
+            })
     }
 });
 
 // Экземпляр класса редактировать аватар
 const newPopupEditAvatar = new PopupWithForm(editAvatarSelector, {
     callbackSubmitForm: (data) => {
+        renderLoading(true)
         // промис для отправки аватара
         api.editAvatar(data.avatar)
             .then((res) => {
@@ -140,19 +119,27 @@ const newPopupEditAvatar = new PopupWithForm(editAvatarSelector, {
             .catch((err) => {
                 console.log(err)
             })
+            .finally(() => {
+                renderLoading(false)
+            })
     }
 })
 
-function renderLoading(isLoading) {
-    const buttons = Array.from(document.querySelectorAll('.popup__button'))
-    buttons.forEach((button) => {
-        if (isLoading) {
-            button.textContent = "Сохранение..."
-        } else {
-            button.textContent = button.value;
+// Экземпляр класса UserInfo
+const userInfo = new UserInfo({
+        data: {
+            person: profilePerson,
+            aboutMe: profileAboutMe,
+            avatar: profileAvatar,
         }
-    })
-}
+    }
+);
+
+// Экземпляр класса открытия карточки
+const newPopupImage = new PopupWithImage(imageSelector);
+
+// Экземпляр класса попапа удаления карточки
+const newPopupCardDelete = new PopupWithConfirm(deleteCardSelector);
 
 // Экземпляры класса валидации форм
 const addPlaceValidation = new FormValidator(formValidationConfig, formAddPlaceSelector);
@@ -179,13 +166,28 @@ addPlaceButton.addEventListener('click', () => {
     newPopupFormAddPlace.open();
     addPlaceValidation.setSubmitButtonState();
 })
+
 // Активация валидации форм
 editProfileValidation.enableValidation();
 addPlaceValidation.enableValidation();
 editAvatarValidation.enableValidation();
+
 // Активация слушателей попапов
 newPopupImage.setEventListeners();
 newPopupEditAvatar.setEventListeners()
 newPopupFormAddPlace.setEventListeners();
 newPopupEditProfile.setEventListeners();
 newPopupCardDelete.setEventListeners();
+
+// Визуальный эффект обработки запроса
+const renderLoading = (isLoading) => {
+    const buttons = Array.from(document.querySelectorAll('.popup__button_save'))
+    buttons.forEach((button) => {
+        if (isLoading) {
+            button.value = "Сохранение..."
+        } else {
+            button.value = 'Сохранить'
+        }
+    })
+}
+

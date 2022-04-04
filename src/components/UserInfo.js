@@ -1,3 +1,4 @@
+// Класс создания пользовательского профиля
 export default class UserInfo {
     constructor({ data }) {
         this._person = document.querySelector(data.person);
@@ -6,14 +7,15 @@ export default class UserInfo {
 
     }
 
+    // Получение информации о пользователе
     getUserInfo() {
-        const userData = {
+        return {
             person: this._person.textContent,
             aboutMe: this._aboutMe.textContent,
-        }
-        return userData;
+        };
     }
 
+    // Добавление новой информации о пользователе
     setUserInfo(name, about, avatar) {
         this._person.textContent = name;
         this._aboutMe.textContent = about;

@@ -1,9 +1,10 @@
-export default class API {
+class API {
     constructor( { baseUrl, headers } ) {
       this._url = baseUrl;
       this._headers = headers;
     }
 
+    // обработка запроса
     _makeRequest(promise) {
         return promise.then((res) => {
             if(res.ok) {
@@ -19,7 +20,7 @@ export default class API {
         })
     }
 
-    // получить карточки с сервера
+    // получить карточки
     getCards() {
         const promise = fetch(`${this._url}/cards`, {
             method: 'GET',
@@ -28,7 +29,7 @@ export default class API {
         return this._makeRequest(promise)
     }
 
-    // отправить карточку на сервер
+    // отправить карточку
     sendCard(name, link) {
         const promise = fetch(`${this._url}/cards`, {
             method: 'POST',
@@ -41,6 +42,7 @@ export default class API {
         return this._makeRequest(promise)
     }
 
+    // Получить профиль пользователя
     getProfile() {
         const promise = fetch(`${this._url}/users/me`, {
             method: 'GET',
@@ -49,6 +51,7 @@ export default class API {
         return this._makeRequest(promise)
     }
 
+    // Редактировать профиль пользователя
     editProfile(name, about) {
         const promise = fetch(`${this._url}/users/me`, {
             method: 'PATCH',
@@ -61,6 +64,7 @@ export default class API {
         return this._makeRequest(promise)
     }
 
+    // Редактировать аватар
     editAvatar(avatar) {
         const promise = fetch(`${this._url}/users/me/avatar`, {
             method: 'PATCH',
@@ -72,6 +76,7 @@ export default class API {
         return this._makeRequest(promise)
     }
 
+    // Добавить лайк
     addLike(id) {
         const promise = fetch(`${this._url}/cards/${id}/likes`, {
             method: 'PUT',
@@ -80,6 +85,7 @@ export default class API {
         return this._makeRequest(promise)
     }
 
+    // Удалить лайк
     deleteLike(id) {
         const promise = fetch(`${this._url}/cards/${id}/likes`, {
             method: 'DELETE',
@@ -88,6 +94,7 @@ export default class API {
         return this._makeRequest(promise)
     }
 
+    // Удалить карточку
     deleteCard(id) {
         const promise = fetch(`${this._url}/cards/${id}`, {
             method: 'DELETE',
@@ -97,5 +104,13 @@ export default class API {
     }
 }
 
-
+// Экземпляр класса Api
+export const api = new API({
+    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-38',
+    headers: {
+        authorization:
+            '6550da10-2d55-4388-86e4-3d7ab266355b',
+        'Content-Type': 'application/json'
+    }
+});
 

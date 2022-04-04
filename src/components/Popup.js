@@ -1,17 +1,20 @@
+// Класс создания попапа
 export default class Popup {
     constructor(popupSelector) {
         this._popup = document.querySelector(popupSelector);
         this._overlay = this._popup.querySelector('.popup__overlay')
         this._clossButton = this._popup.querySelector('.popup__close-button');
         this._handleEscClose = this._handleEscClose.bind(this);
-    }    
+    }
 
+    // закрытие на Esc
     _handleEscClose(evt) {
         if (evt.key === 'Escape') {
             this.close();
         }
     }
 
+    // Обработка закрытия и открытия попапа
     setEventListeners() {
         this._clossButton.addEventListener('click', () => this.close())
         this._overlay.addEventListener('click', () => {

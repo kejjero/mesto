@@ -1,5 +1,6 @@
 import Popup from "./Popup.js";
 
+// Создание класса открытия картинки
 export default class PopupWithImage extends Popup {
     constructor(popupSelector) {
         super(popupSelector);
@@ -8,6 +9,7 @@ export default class PopupWithImage extends Popup {
         this._subtitle = this._popup.querySelector('.popup__subtitle');
     }
 
+    // Открытие картинки с занесением данных
     open(data) {
         this._subtitle.textContent = data.name;
         this._image.src = data.link;

@@ -15,11 +15,11 @@
         <section class="profile">
             <div class="profile__avatar-wrapper">
                 <button type="button" class="profile__avatar-button"></button>
-                <img class="profile__avatar" alt="Аватар" src="https://sun9-4.userapi.com/impg/MpsZDlLgNis1MKbIaNgEtLICBV48SRkqbG4KAA/qS4ivByFiMo.jpg?size=1080x1320&quality=96&sign=33f2c6dd06822b07c821a34293f5ae23&type=album">
+                <img class="profile__avatar" alt="Аватар" src="https://спортсекции18.рф/wp-content/uploads/2020/09/placeholder-man.png">
             </div>
             <div class="profile__info">
-                <h1 class="profile__person"></h1>
-                <p class="profile__about-me"></p>
+                <h1 class="profile__person">Имя</h1>
+                <p class="profile__about-me">Деятельность</p>
                 <button type="button" class="profile__edit-button" aria-label="Редактировать профиль"></button>
             </div>
             <button class="profile__add-button" type="button"></button>
@@ -57,7 +57,7 @@
                        maxlength="200"
                 >
                 <span id="about-me-errors" class="popup__error popup__error_visible"></span>
-                <input type="submit" class="popup__button popup__button_edit-profile" value="Сохранить" >
+                <input type="submit" class="popup__button popup__button_save popup__button_edit-profile" value="Сохранить" >
             </form>
         </div>
         <div class="popup__overlay"></div>
@@ -87,13 +87,11 @@
                        required
                 >
                 <span id="link-place-errors" class="popup__error popup__error_visible"></span>
-                <input type="submit" class="popup__button popup__button_add-place" value="Сохранить">
+                <input type="submit" class="popup__button popup__button_save popup__button_add-place" value="Сохранить">
             </form>
         </div>
         <div class="popup__overlay"></div>
     </div>
-
-
     <div class="popup popup_type_edit-avatar">
         <div class="popup__container">
             <button type="button" class="popup__close-button popup__close-button_edit-avatar" aria-label="Закрыть"></button>
@@ -102,20 +100,17 @@
                 <input type="url"
                        class="popup__input popup__input_link-avatar"
                        name="avatar"
-                       id="avatar"
+                       id="edit-avatar"
                        value=""
                        placeholder="Ссылка на картинку"
                        required
                 >
-                <span id="name-edit-avatar-errors" class="popup__error popup__error_visible"></span>
-                <input type="submit" class="popup__button popup__button_add-place" value="Сохранить">
+                <span id="edit-avatar-errors" class="popup__error popup__error_visible"></span>
+                <input type="submit" class="popup__button popup__button_save popup__button_add-place" value="Сохранить">
             </form>
         </div>
         <div class="popup__overlay"></div>
     </div>
-
-
-
     <section class="popup popup_type_card-delete">
         <div class="popup__container">
             <button class="popup__close-button"></button>
@@ -126,10 +121,6 @@
         </div>
         <div class="popup__overlay"></div>
     </section>
-
-
-
-
     <div class="popup popup_type_image">
         <div class="popup__image-container">
             <button type="button" class="popup__close-button popup__close-button_zoom-image" aria-label="Закрыть"></button>

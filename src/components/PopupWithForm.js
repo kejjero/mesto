@@ -1,5 +1,6 @@
 import Popup from "./Popup.js";
 
+// Класс обработки формы
 export default class PopupWithForm extends Popup {
     constructor(popupSelector, { callbackSubmitForm }) {
         super(popupSelector);
@@ -9,6 +10,7 @@ export default class PopupWithForm extends Popup {
         this._inputs = [...this._form.querySelectorAll('.popup__input')];
     }
 
+    // Получение полей инпутов
     _getInputValues() {
         this._inputValues = {};
         this._inputs.forEach((input) => {
@@ -22,6 +24,7 @@ export default class PopupWithForm extends Popup {
         this._form.reset();
     }
 
+    //Обработка полей по нажатию сабмит
     setEventListeners() {
         super.setEventListeners();
         this._form.addEventListener('submit', (evt) => {

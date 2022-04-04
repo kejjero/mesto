@@ -1,3 +1,4 @@
+// Класс создания карточки
 export default class Card {
     constructor(api, data, cardSelector, popupImage, userId, popupCardDelete) {
         this._api = api;
@@ -17,11 +18,15 @@ export default class Card {
     _handleTrashButton() {
         this._popupCardDelete.open()
         this._popupCardDelete.confirmHandler(() => {
+            // Промис для удаления карточки
             this._api.deleteCard(this._cardId)
                 .then(() => {
                     this._popupCardDelete.close()
                     this._cardElement.remove();
                     this._cardElement = null;
+                })
+                .catch((err) => {
+                console.log(err)
                 })
         })
     }
@@ -71,6 +76,7 @@ export default class Card {
     _handleLikeButton() {
         this._containsLike = this._cardLike.classList.contains('element__like_active');
         if (!this._containsLike) {
+            // промис добавления лайка
             this._api.addLike(this._cardId)
                 .then((res) => {
                 this._cardLike.classList.add('element__like_active');
@@ -81,6 +87,7 @@ export default class Card {
                 })
         }
         else {
+            // промис удаления лайка
             this._api.deleteLike(this._cardId)
                 .then((res) => {
                 this._cardLike.classList.remove('element__like_active');
@@ -97,7 +104,7 @@ export default class Card {
         this._likeValue.textContent = arrayLikes.length;
     }
 
-    // Проверка на владельца карточки
+    // Проверка на владельца карточки по айди
     _isOwned () {
         if (this._userId === this._ownerCardId) {
             this._cardTrash.classList.add('element__trash_active')
@@ -117,7 +124,7 @@ export default class Card {
         this._isLiked() // проверка уже лайкнувшей карточки и отображение самого лайка
         this._countLikes(this._likesArray) // первоначальный подсчет лайков
         this._setEventListeners(); // добавление обработчиков событий на все кнопки
-        this._setData(); // данные для карточки из апи
+        this._setData(); // добавление данных для карточки из апи
 
         return this._cardElement;
     }
