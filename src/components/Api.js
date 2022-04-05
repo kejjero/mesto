@@ -15,9 +15,6 @@ class API {
         .then((cards) => {
             return cards;
         })
-        .catch((err) => {
-            console.log(err)
-        })
     }
 
     // получить карточки
